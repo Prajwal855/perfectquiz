@@ -47,8 +47,6 @@ class QuestionsController < ApplicationController
     end
 
     def submit_answers
-        jwt_payload = JWT.decode(request.headers['Authorization'].split(' ')[1], Rails.application.credentials.fetch(:secret_key_base)).first
-        current_user = User.find(jwt_payload['sub'])
         if current_user.role == "user"
             submitted_answers = params[:answers]
         
@@ -79,8 +77,6 @@ class QuestionsController < ApplicationController
     end
 
     def create
-        jwt_payload = JWT.decode(request.headers['Authorization'].split(' ')[1], Rails.application.credentials.fetch(:secret_key_base)).first
-        current_user = User.find(jwt_payload['sub'])
         if current_user.role == "admin"
             question = Question.create(question_params)
             if question.save
