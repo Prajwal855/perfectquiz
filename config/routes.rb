@@ -12,8 +12,6 @@ Rails.application.routes.draw do
   delete "choice/:id", to: "choices#destroy"
 
 
-
-
   # questions endpoint
   get "questions", to: "questions#index"
   get "getquestion", to: "questions#filtered_questions"
@@ -22,7 +20,6 @@ Rails.application.routes.draw do
   put "question/:id", to: "questions#update"
   delete "question/:id", to: "questions#destroy"
   post "submitanswer", to: "questions#submit_answers"
-
 
 
   # users endpoint
