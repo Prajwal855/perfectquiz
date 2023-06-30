@@ -2,28 +2,29 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   respond_to :json
-
   private
-  def respond_with(users, opts = {})
-    if users.persisted?
+  def respond_with(resource, opts = {})
+    resource.phonenumber = params[:user][:phonenumber]
+    resource.save
+    if resource.persisted?
+      Twilio::SmsService.new(to: resource.phonenumber, pin: '').send_otp
+      token = request.env['warden-jwt_auth.token']
       render json: {
-        status: {code: 200, message: 'Signed up sucessfully.'},
-        data: users
+        status: {code: 200, message: 'Signed up sucessfully.', token: token},
+        meta: resource.as_json(only: [:id, :email]),
       }
     else
       render json: {
-        status: {message: "User couldn't be created successfully. 
-          #{users.errors.full_messages.to_sentence}"}
+        status: {message: "User couldn't be created successfully. #{resource.errors.full_messages.to_sentence}"}
       }, status: :unprocessable_entity
     end
-end
-  # before_action :configure_sign_up_params, only: [:create]
-  # before_action :configure_account_update_params, only: [:update]
+  end
 
-  # GET /resource/sign_up
   def new
     super do |resource|
+    resource.name = params[:user][:name]
     resource.role = params[:user][:role]
+    resource.phonenumber = params[:user][:phonenumber]
     resource.save
    end
  end

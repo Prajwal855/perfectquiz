@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_one :academic
   include Devise::JWT::RevocationStrategies::JTIMatcher
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -17,7 +18,6 @@ class User < ApplicationRecord
   before_validation :set_default_role
 
   private
-
   def set_default_role
     self.role ||= "user"
   end

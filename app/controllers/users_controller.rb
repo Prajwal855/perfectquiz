@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+    before_action :current_user
     def index
         users = User.all
         if users.empty?
@@ -78,6 +79,14 @@ class UsersController < ApplicationController
         user = User.find_by(id: params[:id])
         if user
             return user
+        end
+    end
+
+    def current_user
+        jwt_payload = JWT.decode(request.headers['token'], Rails.application.credentials.fetch(:secret_key_base)).first
+        current_user = User.find(jwt_payload['sub'])
+        if current_user
+            return current_user
         end
     end
 end
