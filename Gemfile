@@ -22,6 +22,7 @@ gem "activesupport"
 gem "activeadmin"
 gem "sassc"
 gem "twilio-ruby"
+gem "aws-sdk-s3"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"

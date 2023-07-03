@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_one :academic
+
   include Devise::JWT::RevocationStrategies::JTIMatcher
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -13,7 +14,7 @@ class User < ApplicationRecord
 
   validates :role, presence: true
 
-  enum role: { user: "user", admin: "admin" }
+  enum role: { user: "user", admin: "admin", teacher: "teacher"}
 
   before_validation :set_default_role
 

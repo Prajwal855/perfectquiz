@@ -17,6 +17,7 @@ class Users::SessionsController < Devise::SessionsController
       elsif @user && @user.valid_password?(params[:user][:password])
         token = request.env['warden-jwt_auth.token']
       render json: {  message: 'Dude Fill Academic Record First.',
+                    token: token
                 }, status: :not_found
 
       else

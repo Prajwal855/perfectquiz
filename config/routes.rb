@@ -38,6 +38,27 @@ Rails.application.routes.draw do
   put "choice/:id", to: "choices#update"
   delete "choice/:id", to: "choices#destroy"
 
+  # courses endpoint
+  get "courses", to: "courses#index"
+  get "course/:id", to: "courses#show"
+  post "course", to: "courses#create"
+  put "course/:id", to: "courses#update"
+  delete "course/:id", to: "courses#destroy"
+
+  # chapters endpoint
+  get "chapters", to: "chapters#index"
+  get "chapter/:id", to: "chapters#show"
+  post "chapter", to: "chapters#create"
+  put "chapter/:id", to: "chapters#update"
+  delete "chapter/:id", to: "chapters#destroy"
+
+  # studymaterials endpoint
+  get "studymaterials", to: "studymaterials#index"
+  get "studymaterial/:id", to: "studymaterials#show"
+  post "studymaterial", to: "studymaterials#create"
+  put "studymaterial/:id", to: "studymaterials#update"
+  delete "studymaterial/:id", to: "studymaterials#destroy"
+
 
   # questions endpoint
   get "questions", to: "questions#index"

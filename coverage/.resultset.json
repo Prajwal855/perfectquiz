@@ -1013,11 +1013,30 @@
           null
         ]
       },
+      "C:/Users/SPURGE/perfectquiz/spec/factories/chapters.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
       "C:/Users/SPURGE/perfectquiz/spec/factories/choices.rb": {
         "lines": [
           1,
           1,
           7,
+          1,
+          null,
+          null
+        ]
+      },
+      "C:/Users/SPURGE/perfectquiz/spec/factories/courses.rb": {
+        "lines": [
+          1,
+          1,
           1,
           null,
           null
@@ -1053,6 +1072,16 @@
           null
         ]
       },
+      "C:/Users/SPURGE/perfectquiz/spec/factories/studymaterials.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
       "C:/Users/SPURGE/perfectquiz/spec/factories/users.rb": {
         "lines": [
           1,
@@ -1076,6 +1105,27 @@
           null,
           null,
           null,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
           1,
           null,
           null,
@@ -1157,7 +1207,19 @@
           null
         ]
       },
+      "C:/Users/SPURGE/perfectquiz/app/helpers/chapters_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
       "C:/Users/SPURGE/perfectquiz/app/helpers/choices_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "C:/Users/SPURGE/perfectquiz/app/helpers/courses_helper.rb": {
         "lines": [
           1,
           null
@@ -1176,6 +1238,12 @@
         ]
       },
       "C:/Users/SPURGE/perfectquiz/app/helpers/questions_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "C:/Users/SPURGE/perfectquiz/app/helpers/studymaterials_helper.rb": {
         "lines": [
           1,
           null
@@ -1493,6 +1561,7 @@
         "lines": [
           1,
           1,
+          null,
           1,
           null,
           null,
@@ -1536,6 +1605,44 @@
           null
         ]
       },
+      "C:/Users/SPURGE/perfectquiz/spec/helpers/chapters_helper_spec.rb": {
+        "lines": [
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "C:/Users/SPURGE/perfectquiz/spec/helpers/courses_helper_spec.rb": {
+        "lines": [
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
       "C:/Users/SPURGE/perfectquiz/spec/helpers/intrests_helper_spec.rb": {
         "lines": [
           1,
@@ -1556,6 +1663,25 @@
         ]
       },
       "C:/Users/SPURGE/perfectquiz/spec/helpers/qualifications_helper_spec.rb": {
+        "lines": [
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "C:/Users/SPURGE/perfectquiz/spec/helpers/studymaterials_helper_spec.rb": {
         "lines": [
           1,
           null,
@@ -1669,10 +1795,43 @@
           null
         ]
       },
+      "C:/Users/SPURGE/perfectquiz/spec/models/chapter_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "C:/Users/SPURGE/perfectquiz/app/models/chapter.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null
+        ]
+      },
       "C:/Users/SPURGE/perfectquiz/spec/models/choice_spec.rb": {
         "lines": [
           1,
           null,
+          1,
+          1,
+          null
+        ]
+      },
+      "C:/Users/SPURGE/perfectquiz/spec/models/course_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "C:/Users/SPURGE/perfectquiz/app/models/course.rb": {
+        "lines": [
           1,
           1,
           null
@@ -1730,6 +1889,24 @@
           null
         ]
       },
+      "C:/Users/SPURGE/perfectquiz/spec/models/studymaterial_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "C:/Users/SPURGE/perfectquiz/app/models/studymaterial.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
       "C:/Users/SPURGE/perfectquiz/spec/models/user_spec.rb": {
         "lines": [
           1,
@@ -1751,6 +1928,17 @@
         ]
       },
       "C:/Users/SPURGE/perfectquiz/spec/requests/accounts_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "C:/Users/SPURGE/perfectquiz/spec/requests/chapters_spec.rb": {
         "lines": [
           1,
           null,
@@ -2004,6 +2192,17 @@
           0,
           null,
           null,
+          null,
+          null
+        ]
+      },
+      "C:/Users/SPURGE/perfectquiz/spec/requests/courses_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
           null,
           null
         ]
@@ -2393,6 +2592,17 @@
           null
         ]
       },
+      "C:/Users/SPURGE/perfectquiz/spec/requests/studymaterials_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
       "C:/Users/SPURGE/perfectquiz/spec/requests/users_spec.rb": {
         "lines": [
           1,
@@ -2568,6 +2778,6 @@
         ]
       }
     },
-    "timestamp": 1688123231
+    "timestamp": 1688379001
   }
 }

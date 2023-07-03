@@ -100,7 +100,7 @@ class QuestionsController < ApplicationController
 
     def create
         if current_user.academic.present?
-            if current_user.role == "admin"
+            if current_user.role == "admin" || current_user.role == "teacher"
                 question = Question.create(question_params)
                 if question.save
                     render json: {
