@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Academic, type: :model do
+    include FactoryBot::Syntax::Methods
     let(:user) {FactoryBot.create(:user)} 
     let(:intrest) {FactoryBot.create(:intrest)}
     let(:qualification) {FactoryBot.create(:qualification)}

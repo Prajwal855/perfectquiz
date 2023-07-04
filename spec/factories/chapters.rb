@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :chapter do
     chap { "MyString" }
-    course { nil }
+    association :course
   end
 end

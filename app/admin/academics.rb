@@ -18,21 +18,21 @@ ActiveAdmin.register Academic do
   :career_goals, :language, :other_language, :specialization, :currently_working,
   :availability,:experiance, :user_id, :cv, :governament_id
 
-  form do|f|
-    f.input :college_name
-    f.input :intrest_id
-    f.input :qualification_id
-    f.input :career_goals
-    f.input :language
-    f.input :other_language
-    f.input :specialization
-    f.input :currently_working
-    f.input :availability
-    f.input :experiance
-    f.input :user_id
-    f.input :cv, as: :file
-    f.input :governament_id, as: :file
-    f.actions
-  end
+  # form do|f|
+  #   f.input :college_name
+  #   f.input :intrest_id
+  #   f.input :qualification_id
+  #   f.input :career_goals
+  #   f.input :language
+  #   f.input :other_language
+  #   f.input :specialization
+  #   f.input :currently_working
+  #   f.input :availability
+  #   f.input :experiance
+  #   f.input :user_id
+  #   f.input :cv, as: :file
+  #   f.input :governament_id, as: :file
+  #   f.actions
+  # end
   
 end

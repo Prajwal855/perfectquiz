@@ -9,24 +9,46 @@ class ChaptersController < ApplicationController
                     chapters: []
                 }, status: :not_found
             else
-                render json: {
+                response = chapters.map do |chapter|
+                    {
+                      chap: chapter.chap,
+                      course_id: chapter.course_id,
+                      studymaterials: chapter.studymaterials.map do |studymaterial|
+                        {
+                          id: studymaterial.id,
+                          video: studymaterial.video.present? ? url_for(studymaterial.video) : nil,
+                          softcopy: studymaterial.softcopy.present? ? url_for(studymaterial.softcopy) : nil
+                        }
+                      end
+                    }
+                  end
+            
+                  render json: {
                     message: "Chapters Found",
-                    chapters: chapters.as_json(only: [:chap, :course_id])
-                }, status: :ok
+                    chapters: response
+                  }, status: :ok
             end
         else
             render json: { message: "Dude Complete the Academic Form First"
                 }, status: 401
         end
     end
-
     def show
         if current_user.academic.present?
             chapter = set_chapter
             if chapter
-                render json: {message: "Chapter Found",
-                chapter:chapters.as_json(only: [:chap, :course_id])
-            }, status: :ok
+                  render json: {
+                    message: "Chapters Found",
+                    chap: chapter.chap,
+                    studymaterials: chapter.studymaterials.map do |studymaterial|
+                        {
+                          id: studymaterial.id,
+                          textbook: studymaterial.textbook,
+                          video: studymaterial.video.present? ? url_for(studymaterial.video) : nil,
+                          softcopy: studymaterial.softcopy.present? ? url_for(studymaterial.softcopy) : nil
+                        }
+                      end
+                  }, status: :ok
             else
                 render json: {
                     message: "Chapter Not Found",
@@ -87,6 +109,7 @@ class ChaptersController < ApplicationController
                 }, status: 401
         end
     end
+
     def destroy
         if current_user.academic.present?
             if current_user.role == "admin" || current_user.role == "teacher"
@@ -118,6 +141,7 @@ class ChaptersController < ApplicationController
             return chapter
         end
     end
+
     def chapter_params
         params.require(:chapter).permit(:chap,:course_id)
     end

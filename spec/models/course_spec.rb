@@ -1,5 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Course, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  include FactoryBot::Syntax::Methods
+  let(:course) { FactoryBot.create(:course) }
+  describe 'Checks the valid Course' do
+   it 'Presence of valid name' do
+    course = build(:course)
+     expect(course).to be_valid
+   end
+  end
 end

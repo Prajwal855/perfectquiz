@@ -16,9 +16,9 @@ ActiveAdmin.register Choice do
   # end
   permit_params :option, :question_id
 
-  form do|f|
-    f.input :option
-    f.input :question_id
-    f.actions
-  end
+  # form do|f|
+  #   f.input :option
+  #   f.input :question_id
+  #   f.actions
+  # end
 end

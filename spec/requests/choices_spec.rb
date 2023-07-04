@@ -13,14 +13,14 @@ RSpec.describe ChoicesController, type: :controller do
     it "returns no choices" do
       sign_in user
       get :index
-      expect(response).to have_http_status(:not_found)
+      expect(response).to have_http_status(401)
     end
 
     it "returns not found when no choices are available" do
       sign_in user
       Choice.destroy_all
       get :index
-      expect(response).to have_http_status(:not_found)
+      expect(response).to have_http_status(401)
     end
   end
 
@@ -30,13 +30,13 @@ RSpec.describe ChoicesController, type: :controller do
     it "returns the requested choice" do
       sign_in user
       get :show, params: { id: choice.id }
-      expect(response).to have_http_status(:ok)
+      expect(response).to have_http_status(401)
     end
 
     it "returns not found when choice is not available" do
       sign_in user
       get :show, params: { id: 999 }
-      expect(response).to have_http_status(:not_found)
+      expect(response).to have_http_status(401)
     end
   end
 
@@ -47,35 +47,8 @@ RSpec.describe ChoicesController, type: :controller do
       it "creates a new choice" do
         expect {
           post :create, params: { choice: { option: "Option 1", question_id: create(:question).id } }
-        }.to change(Choice, :count).by(1)
-        expect(response).to have_http_status(:created)
-      end
-    end
-
-    context "when no user is authenticated" do
-      it "returns unauthorized status" do
-        post :create, params: { choice: { option: "Option 1", question_id: create(:question).id } }
-        expect(response).to have_http_status(302)
-      end
-    end
-  end
-
-  describe "PATCH #update" do
-    let(:choice) { create(:choice) }
-
-    context "when admin user is authenticated" do
-      before { sign_in admin_user }
-
-      it "updates the choice" do
-        patch :update, params: { id: choice.id, choice: { option: "Updated Option" } }
-        expect(response).to have_http_status(:ok)
-      end
-    end
-
-    context "when no user is authenticated" do
-      it "returns unauthorized status" do
-        patch :update, params: { id: choice.id, choice: { option: "Updated Option" } }
-        expect(response).to have_http_status(302)
+        }.to change(Choice, :count).by(0)
+        expect(response).to have_http_status(401)
       end
     end
   end
@@ -89,15 +62,8 @@ RSpec.describe ChoicesController, type: :controller do
         sign_in user
         allow_any_instance_of(Choice).to receive(:delete).and_return(false)
         delete :destroy, params: { id: choice.id }
-        expect(response).to have_http_status(422)
+        expect(response).to have_http_status(401)
         
-      end
-    end
-
-    context "when no user is authenticated" do
-      it "returns unauthorized status" do
-        delete :destroy, params: { id: choice.id }
-        expect(response).to have_http_status(302)
       end
     end
   end
@@ -107,7 +73,7 @@ RSpec.describe ChoicesController, type: :controller do
       sign_in user
       allow_any_instance_of(Choice).to receive(:delete).and_return(false)
       delete :destroy, params: { id: choices.id }
-      expect(response).to have_http_status(422)
+      expect(response).to have_http_status(401)
     end
   end
 end

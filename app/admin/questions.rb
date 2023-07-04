@@ -16,12 +16,12 @@ ActiveAdmin.register Question do
   # end
   permit_params :que, :correct_answer, :level, :language
 
-  form do|f|
-    f.input :que
-    f.input :correct_answer
-    f.input :level
-    f.input :language
-    f.actions
-  end
+  # form do|f|
+  #   f.input :que
+  #   f.input :correct_answer
+  #   f.input :level
+  #   f.input :language
+  #   f.actions
+  # end
   
 end
