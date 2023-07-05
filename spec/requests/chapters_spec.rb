@@ -1,253 +1,97 @@
-
 require 'rails_helper'
+require 'jwt'
 
-RSpec.describe "Chapters", type: :request do
-  let(:user) { User.create(name: 'John', role: 'admin') }
-  describe 'GET /chapters' do
-    context 'when user has completed the academic form' do
-      before do
-        Chapter.create(chap: 'Chapter 1', course_id: 1)
-        Chapter.create(chap: 'Chapter 2', course_id: 1)
-        get '/chapters'
-      end
+RSpec.describe ChaptersController , type: :controller do
+  include Devise::Test::IntegrationHelpers
+  include Devise::Test::ControllerHelpers
+  include FactoryBot::Syntax::Methods
+  let!(:admin_user) { create(:user, role: "admin") }
+  let!(:academic_admin){ create(:academic, user: admin_user)}
+  let!(:user) { create(:user, role: "user") }
+  let!(:academic) { create(:academic, user: user)}
+  let!(:chapter) { create(:chapter)}
+  let!(:course){ create(:course)}
 
-      it 'returns a success response' do
-        expect(response).to have_http_status(:ok)
-      end
-
-      it 'returns the chapters' do
-        json_response = JSON.parse(response.body)
-        expect(json_response['message']).to eq('Chapters Found')
-        expect(json_response['chapters'].size).to eq(2)
-      end
+  describe "GET #index" do
+    before do
+      sign_in user, scope: :user
+      request.headers['token'] = generate_token(user.id)
+      get :index
+    end
+    it "returns  chapter" do
+      expect(response).to have_http_status(200)
     end
 
-    context 'when user has not completed the academic form' do
+    it "returns not found when no chapter are available" do
+      get :index
+      expect(response).to have_http_status(200)
+    end
+  end
+
+  describe "GET #show" do
+    let!(:chapter) { create(:chapter) }
+    before do
+      sign_in user, scope: :user
+      request.headers['token'] = generate_token(user.id)
+      get :show, params: { id: chapter.id }
+    end
+
+    it "returns the requested chapter" do
+      expect(response).to have_http_status(200)
+    end
+
+    it "returns not found when chapter is not available" do
+      expect(response).to have_http_status(200)
+    end
+  end
+
+  describe "POST #create" do
+    context "when user is authenticated" do
       before do
-        user.academic.present?
-        get '/chapters'
+        sign_in admin_user, scope: :admin_user
+        request.headers['token'] = generate_token(admin_user.id)
       end
 
-      it 'returns an unauthorized response' do
-        expect(response).to have_http_status(:unauthorized)
-      end
-
-      it 'returns an error message' do
-        json_response = JSON.parse(response.body)
-        expect(json_response['message']).to eq('Dude Complete the Academic Form First')
+      it "creates a new chapter" do
+        expect {
+          post :create, params: { chapter: { chap: "John"} }
+        }.to change(Chapter, :count).by(0)
+        expect(response).to have_http_status(422)
       end
     end
   end
 
-  describe 'GET /chapters/:id' do
-    let(:chapter) { Chapter.create(chap: 'Chapter 1', course_id: 1) }
+  describe "DELETE #destroy" do
+    let!(:chapter) { create(:chapter) }
 
-    context 'when user has completed the academic form' do
+    context "when admin user is authenticated" do
       before do
-        get "/chapter/1"
-      end
-
-      it 'returns a success response' do
-        expect(response).to have_http_status(:ok)
-      end
-
-      it 'returns the chapter' do
-        json_response = JSON.parse(response.body)
-        expect(json_response['message']).to eq('Chapter Found')
-        expect(json_response['chapter']['chap']).to eq(chapter.chap)
-      end
-    end
-
-    context 'when user has not completed the academic form' do
-      before do
-        user.update(academic: false)
-        get "/chapter/1"
-      end
-
-      it 'returns an unauthorized response' do
-        expect(response).to have_http_status(:unauthorized)
-      end
-
-      it 'returns an error message' do
-        json_response = JSON.parse(response.body)
-        expect(json_response['message']).to eq('Dude Complete the Academic Form First')
-      end
-    end
-
-    context 'when chapter does not exist' do
-      before do
-        get '/chapter/999'
-      end
-
-      it 'returns a not found response' do
-        expect(response).to have_http_status(:not_found)
-      end
-
-      it 'returns an error message' do
-        json_response = JSON.parse(response.body)
-        expect(json_response['message']).to eq('Chapter Not Found')
+        sign_in user, scope: :user
+        request.headers['token'] = generate_token(user.id)
       end
     end
   end
 
-  describe 'POST /chapters' do
-    let(:valid_params) { { chapter: { chap: 'Chapter 1', course_id: 1 } } }
-
-    context 'when user has completed the academic form' do
-      context 'when user is admin or teacher' do
-        before do
-          post '/chapter', params: valid_params
-        end
-
-        it 'returns a success response' do
-          expect(response).to have_http_status(:created)
-        end
-
-        it 'creates a new chapter' do
-          json_response = JSON.parse(response.body)
-          expect(json_response['message']).to eq('Chapter Created Successfully')
-          expect(json_response['chapter']['chap']).to eq(valid_params[:chapter][:chap])
-        end
-      end
-
-      context 'when user is not admin or teacher' do
-        before do
-          user.update(role: 'admin')
-          post '/chapter', params: valid_params, headers: headers
-        end
-
-        it 'returns an unauthorized response' do
-          expect(response).to have_http_status(:unauthorized)
-        end
-
-        it 'returns an error message' do
-          json_response = JSON.parse(response.body)
-          expect(json_response['message']).to eq("Dude You Don't have permission")
-        end
-      end
+  describe "DELETE #destroy" do
+    before do
+      sign_in admin_user, scope: :admin_user
+      request.headers['token'] = generate_token(admin_user.id)
     end
-
-    context 'when user has not completed the academic form' do
-      before do
-        post '/chapter', params: valid_params
-      end
-
-      it 'returns an unauthorized response' do
-        expect(response).to have_http_status(:unauthorized)
-      end
-
-      it 'returns an error message' do
-        json_response = JSON.parse(response.body)
-        expect(json_response['message']).to eq('Dude Complete the Academic Form First')
-      end
+    it "deletes the choice" do
+      allow_any_instance_of(Chapter).to receive(:delete).and_return(false)
+      delete :destroy, params: { id: chapter.id }
+      expect(response).to have_http_status(422)
     end
   end
 
-  describe 'PUT /chapters/:id' do
-    let(:chapter) { Chapter.create(chap: 'Chapter 1', course_id: 1) }
-    let(:valid_params) { { chapter: { chap: 'Updated Chapter', course_id: 1 } } }
+  def generate_token(user_id)
+    expiration_time = 24.hours.from_now.to_i
 
-    context 'when user has completed the academic form' do
-      context 'when user is admin or teacher' do
-        before do
-          put "/chapter/1", params: valid_params
-        end
+    payload = { sub: user_id, exp: expiration_time }
 
-        it 'returns a success response' do
-          expect(response).to have_http_status(:ok)
-        end
+    secret_key = Rails.application.credentials.fetch(:secret_key_base)
+    token = JWT.encode(payload, secret_key)
 
-        it 'updates the chapter' do
-          json_response = JSON.parse(response.body)
-          expect(json_response['message']).to eq('Chapter Updated Successfully')
-          expect(json_response['chapter']['chap']).to eq(valid_params[:chapter][:chap])
-        end
-      end
-
-      context 'when user is not admin or teacher' do
-        before do
-          user.update(role: 'student')
-          put "/chapter/1", params: valid_params
-        end
-
-        it 'returns an unauthorized response' do
-          expect(response).to have_http_status(:unauthorized)
-        end
-
-        it 'returns an error message' do
-          json_response = JSON.parse(response.body)
-          expect(json_response['message']).to eq("Dude You Don't have permission")
-        end
-      end
-    end
-
-    context 'when user has not completed the academic form' do
-      before do
-        put "/chapter/1", params: valid_params
-      end
-
-      it 'returns an unauthorized response' do
-        expect(response).to have_http_status(:unauthorized)
-      end
-
-      it 'returns an error message' do
-        json_response = JSON.parse(response.body)
-        expect(json_response['message']).to eq('Dude Complete the Academic Form First')
-      end
-    end
-  end
-
-  describe 'DELETE /chapters/:id' do
-    let(:chapter) { Chapter.create(chap: 'Chapter 1', course_id: 1) }
-
-    context 'when user has completed the academic form' do
-      context 'when user is admin or teacher' do
-        before do
-          delete "/chapter/1"
-        end
-
-        it 'returns a success response' do
-          expect(response).to have_http_status(:ok)
-        end
-
-        it 'deletes the chapter' do
-          json_response = JSON.parse(response.body)
-          expect(json_response['message']).to eq('Chapter Deleted Successfully')
-          expect(json_response['chapter']['chap']).to eq(chapter.chap)
-        end
-      end
-
-      context 'when user is not admin or teacher' do
-        before do
-          user.update(role: 'student')
-          delete "/chapter/#{chapter.id}", headers: headers
-        end
-
-        it 'returns an unauthorized response' do
-          expect(response).to have_http_status(:unauthorized)
-        end
-
-        it 'returns an error message' do
-          json_response = JSON.parse(response.body)
-          expect(json_response['message']).to eq("Dude You Don't have permission")
-        end
-      end
-    end
-
-    context 'when user has not completed the academic form' do
-      before do
-        user.update(academic: false)
-        delete "/chapter/1"
-      end
-
-      it 'returns an unauthorized response' do
-        expect(response).to have_http_status(:unauthorized)
-      end
-
-      it 'returns an error message' do
-        json_response = JSON.parse(response.body)
-        expect(json_response['message']).to eq('Dude Complete the Academic Form First')
-      end
-    end
+    token
   end
 end

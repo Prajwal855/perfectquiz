@@ -63,30 +63,7 @@ class CoursesController < ApplicationController
                 }, status: 401
         end
     end
-    def update
-        if current_user.academic.present?
-            if current_user.role == "admin" || current_user.role == "teacher"
-                course = set_course
-                if course.update(course_params)
-                    render json: {
-                        message: "Course Updated Successfully",
-                        course: course.as_json(only: [:modul])
-                    }, status: :ok
-                else
-                    render json: {
-                        message: "Course Cannot be Updated",
-                        error: course.errors.full_messages
-                    }, status: 422
-                end
-            else
-                render json: { message: "Dude You Don't have permission"
-                }, status: 401
-            end
-        else
-            render json: { message: "Dude Complete the Academic Form First"
-                }, status: 401
-        end
-    end
+    
     def destroy
         if current_user.academic.present?
             if current_user.role == "admin" || current_user.role == "teacher"

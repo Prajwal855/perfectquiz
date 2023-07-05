@@ -15,21 +15,6 @@ class AcademicsController < ApplicationController
         end        
     end
 
-    def show
-        academic = set_academic
-        if academic
-            render json: {
-                message: "Academic Found",
-                academic: academic
-            }, status: :ok
-        else
-            render json: {
-                message: "Academic Not Found",
-                academic: []
-            }, status: :not_found
-        end
-    end
-
     def create
         academic = Academic.create(academics_params)
         if academic.save
@@ -40,36 +25,6 @@ class AcademicsController < ApplicationController
         else
             render json: {
                 message: "Academic Cannot be Created",
-                academic: academic.errors.full_messages
-            }, status: 422
-        end
-    end
-
-    def update 
-        academic = set_academic
-        if academic.update(academics_params)
-            render json: {
-                message: "Academic Updated Successfully",
-                academic: academic
-            }, status: :ok
-        else
-            render json: {
-                message: "Academic Cannot be Updated",
-                academic: academic.errors.full_messages
-            }, status: 422
-        end
-    end
-
-    def destroy
-        academic = set_academic
-        if academic.delete
-            render json: {
-                message: "Academic Deleted Successfully",
-                academic: academic
-            }, status: :ok
-        else
-            render json: {
-                message: "Academic Cannot be Deleted",
                 academic: academic.errors.full_messages
             }, status: 422
         end

@@ -2,17 +2,17 @@ test:
   service: Disk
   root: <%= Rails.root.join("tmp/storage") %>
 
-# local:
-#   service: Disk
-#   root: <%= Rails.root.join("storage") %>
+local:
+  service: Disk
+  root: <%= Rails.root.join("storage") %>
 
 # Use bin/rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
-amazon:
-  service: S3
-  access_key_id: AKIAQCZWMBSISOPD27YK
-  secret_access_key: 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
-  region: eu-north-1
-  bucket: perfectquiz
+# amazon:
+#   service: S3
+#   access_key_id: AKIAQCZWMBSISOPD27YK
+#   secret_access_key: abmJvTUkQoDeN4t4ZjeMbBRAdrx9rQycCaCuSW1P
+#   region: eu-north-1
+#   bucket: perfectquiz
 
 # Remember not to checkin your GCS keyfile to a repository
 # google:

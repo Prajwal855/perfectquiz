@@ -6,10 +6,15 @@ class AccountsController < ApplicationController
         current_user = User.find(jwt_payload['sub'])
         sms_service = Twilio::SmsService.new(to: current_user.phonenumber, pin: sms_verification_params[:pin])
         verification_check = sms_service.verify_otp
-
-        render json: {
-            message: "OTP Verified"
-        }, status: :ok
+        if verification_check == 'approved'
+            render json: {
+                message: "OTP Verified"
+            }, status: :ok
+        else
+            render json: {
+                message: "Wrong Otp Please Try Again...."
+            }, status: 404
+        end
     end
   
     private

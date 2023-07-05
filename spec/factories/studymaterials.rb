@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :studymaterial do
     textbook { "MyText" }
-    chapter { nil }
+    association :chapter
   end
 end

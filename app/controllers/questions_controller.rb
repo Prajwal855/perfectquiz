@@ -143,26 +143,6 @@ class QuestionsController < ApplicationController
         end
     end
 
-    def destroy
-        if current_user.academic.present?
-            question = set_question
-            if question.delete
-                render json: {
-                    message: "Question Deleted Successfully",
-                    question: question
-                }, status: :ok
-            else
-                render json: {
-                    message: "Question unable to Delete",
-                    error: question.errors.full_messages
-                }, status: 422
-            end
-        else
-            render json: { message: "Dude Complete the Academic Form First"
-                }, status: 401
-        end
-    end
-
     private
     def question_params
         params.require(:question).permit(:que, :correct_answer, :level, :language)

@@ -64,31 +64,6 @@ class StudymaterialsController < ApplicationController
         end
     end
 
-    def update
-        if current_user.academic.present?
-            if current_user.role == "admin" || current_user.role == "teacher"
-                studymaterial = set_studymaterial
-                if studymaterial.update(studymaterial_params)
-                    render json: {
-                        message: "Studymaterial Updated Successfully",
-                        studymaterial: StudymaterialSerializer.new(studymaterial)
-                    }, status: :ok
-                else
-                    render json: {
-                        message: "Studymaterial Cannot be Updated",
-                        error: studymaterial.errors.full_messages
-                    }, status: 422
-                end
-            else
-                render json: { message: "Dude You Don't have permission"
-                }, status: 401
-            end
-        else
-            render json: { message: "Dude Complete the Academic Form First"
-                }, status: 401
-        end
-    end
-
     def destroy
         if current_user.academic.present?
             if current_user.role == "admin" || current_user.role == "teacher"

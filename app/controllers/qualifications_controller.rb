@@ -60,30 +60,6 @@ class QualificationsController < ApplicationController
         end
     end
 
-    def update
-        if current_user.academic.present?
-            if current_user.role == 'admin'
-                qualification = set_qualification
-                if qualification.update(qualification_params)
-                    render json: {
-                        message: "Qualification Updated Successfully",
-                        qualification: qualification.as_json(only: [:id, :name])
-                    }, status: :ok
-                else
-                    render json: {
-                        message: "Qualification Unable to Update",
-                        error: qualification.errors.full_messages
-                    }, status: 422
-                end
-            else
-                render json: { message: "Dude You Don't have permission"
-                    }, status: 401
-            end
-        else
-            render json: { message: "Dude Complete the Academic Form First"
-                }, status: 401
-        end
-    end
 
     def destroy
         if current_user.academic.present?

@@ -60,31 +60,6 @@ class IntrestsController < ApplicationController
         end
     end
 
-    def update
-        if current_user.academic.present?
-            if current_user.role == 'admin'
-                intrest = set_intrest
-                if intrest.update(intrest_params)
-                    render json: {
-                        message: "Intrest Updated Successfully",
-                        intrest: intrest.as_json(only: [:id, :name])
-                    }, status: :ok
-                else
-                    render json: {
-                        message: "Intrest Unable to Update",
-                        error: intrest.errors.full_messages
-                    }, status: 422
-                end
-            else
-                render json: { message: "Dude You Don't have permission"
-                    }, status: 401
-            end
-        else
-            render json: { message: "Dude Complete the Academic Form First"
-                }, status: 401
-        end
-    end
-
     def destroy
         if current_user.academic.present?
             if current_user.role == 'admin'

@@ -85,30 +85,6 @@ class ChaptersController < ApplicationController
                 }, status: 401
         end
     end
-    def update
-        if current_user.academic.present?
-            if current_user.role == "admin" || current_user.role == "teacher"
-                chapter = set_chapter
-                if chapter.update(chapter_params)
-                    render json: {
-                        message: "Chapter Updated Successfully",
-                        chapter: chapter.as_json(only: [:chap, :course_id])
-                    }, status: :ok
-                else
-                    render json: {
-                        message: "Chapter Cannot be Updated",
-                        error: chapter.errors.full_messages
-                    }, status: 422
-                end
-            else
-                render json: { message: "Dude You Don't have permission"
-                }, status: 401
-            end
-        else
-            render json: { message: "Dude Complete the Academic Form First"
-                }, status: 401
-        end
-    end
 
     def destroy
         if current_user.academic.present?
