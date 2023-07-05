@@ -11,7 +11,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       token = request.env['warden-jwt_auth.token']
       render json: {
         status: {code: 200, message: 'Signed up sucessfully.', token: token},
-        meta: resource.as_json(only: [:id, :email]),
+        meta: resource.as_json(only: [:id, :email, :role]),
       }
     else
       render json: {
