@@ -4,6 +4,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   respond_to :json
   private
   def respond_with(resource, opts = {})
+    resource.name = params[:user][:name]
+    resource.role = params[:user][:role]
     resource.phonenumber = params[:user][:phonenumber]
     resource.save
     if resource.persisted?
@@ -20,14 +22,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
-  def new
-    super do |resource|
-    resource.name = params[:user][:name]
-    resource.role = params[:user][:role]
-    resource.phonenumber = params[:user][:phonenumber]
-    resource.save
-   end
- end
+#   def new
+#     super do |resource|
+#     resource.name = params[:user][:name]
+#     resource.role = params[:user][:role]
+#     resource.phonenumber = params[:user][:phonenumber]
+#     resource.save
+#    end
+#  end
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 

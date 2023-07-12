@@ -4,7 +4,7 @@ class Users::SessionsController < Devise::SessionsController
   respond_to :json
   
   def respond_with(resource, _opts = {})
-    if @user && @user.academic.present? && @user.valid_password?(params[:user][:password])
+    if @user && @user.academic.present? && @user.valid_password?(params[:user][:password]) && @user.otp_verified == true
       sign_in @user
       token = request.env['warden-jwt_auth.token']
           response_data = {
@@ -14,12 +14,16 @@ class Users::SessionsController < Devise::SessionsController
             } 
           }
           render json: response_data
-      elsif @user && @user.valid_password?(params[:user][:password])
+      elsif @user && @user.valid_password?(params[:user][:password]) && @user.otp_verified == true
         token = request.env['warden-jwt_auth.token']
-      render json: {  message: 'Dude Fill Academic Record First.',
+        render json: {  message: 'Dude Fill Academic Record First.',
+                      token: token
+                  }, status: :not_found
+      elsif @user && @user.valid_password?(params[:user][:password]) && @user.otp_verified == nil
+        token = request.env['warden-jwt_auth.token']
+      render json: {  message: 'Dude Verify The OTP First.',
                     token: token
                 }, status: :not_found
-
       else
         render json:{ message: "invalid password"}, status: 401
       end
