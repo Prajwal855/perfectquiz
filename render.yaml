@@ -15,8 +15,8 @@ envVars:
 fromDatabase:
   name: postgres
   property: connectionString
-    - type: redis
-    name: redis
-    isAllowList: []
-    plan: free
-    maxmemoryPolicy: noeviction  
+- type: redis
+  name: redis
+  isAllowList: []
+  plan: free
+  maxmemoryPolicy: noeviction  
