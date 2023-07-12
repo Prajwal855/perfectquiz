@@ -15,7 +15,7 @@ envVars:
 fromDatabase:
   name: postgres
   property: connectionString
-    -type: redis
+    - type: redis
     name: redis
     isAllowList: []
     plan: free
