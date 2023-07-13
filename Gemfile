@@ -10,7 +10,7 @@ gem "rails", "~> 7.0.5"
 gem "sprockets-rails"
 
 # Use sqlite3 as the database for Active Record
-gem 'pg'
+gem "sqlite3", "~> 1.4"
 
 gem "devise"
 gem "devise-jwt"
@@ -24,6 +24,8 @@ gem "sassc"
 gem "twilio-ruby"
 gem "aws-sdk-s3"
 gem 'dotenv-rails'
+gem "searchkick"
+gem "elasticsearch"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"

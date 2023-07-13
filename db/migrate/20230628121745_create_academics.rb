@@ -11,7 +11,7 @@ class CreateAcademics < ActiveRecord::Migration[7.0]
       t.string :specialization
       t.string :experiance
       t.boolean :availability
-      t.references :user, null: false, foreign_key: true
+      t.references :user, null: false, foreign_key: true, unique: true
 
       t.timestamps
     end

@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   get "course/:id", to: "courses#show"
   post "course", to: "courses#create"
   put "course/:id", to: "courses#update"
+  get "search", to: "courses#elastic_search"
   delete "course/:id", to: "courses#destroy"
 
   # chapters endpoint

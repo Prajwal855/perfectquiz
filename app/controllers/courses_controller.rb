@@ -63,7 +63,28 @@ class CoursesController < ApplicationController
                 }, status: 401
         end
     end
-    
+
+    def elastic_search
+        if current_user.academic.present?
+            search = params[:course]
+            courses = Course.where("modul like ?","%#{search}%")
+            if courses
+                render json: {
+                    message: "Course Found In #{params[:course]} Successfully",
+                    course: courses.as_json(only: [:id,:modul], include: { chapters: { only: [:id,:chap] } })
+                }, status: :ok
+            else
+                render json: {
+                    message: "Course Not Found In #{params[:course]} Successfully",
+                    error: courses.errors.full_messages
+                }, status: 422
+            end
+        else
+            render json: { message: "Dude Complete the Academic Form First"
+                }, status: 401
+        end
+    end
+
     def destroy
         if current_user.academic.present?
             if current_user.role == "admin" || current_user.role == "teacher"

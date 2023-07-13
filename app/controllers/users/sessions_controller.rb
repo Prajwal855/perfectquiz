@@ -21,7 +21,7 @@ class Users::SessionsController < Devise::SessionsController
                   }, status: :not_found
       elsif @user && @user.valid_password?(params[:user][:password]) && @user.otp_verified == nil
         token = request.env['warden-jwt_auth.token']
-      render json: {  message: 'Dude Verify The OTP First.',
+        render json: {  message: 'Dude Verify The OTP First.',
                     token: token
                 }, status: :not_found
       else

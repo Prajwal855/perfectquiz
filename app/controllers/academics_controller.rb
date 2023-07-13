@@ -1,5 +1,6 @@
 class AcademicsController < ApplicationController
     before_action :current_user
+    
     def index
         academics = Academic.all
         if academics.empty?
