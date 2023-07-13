@@ -113,7 +113,7 @@ class ChoicesController < ApplicationController
     end
 
     def current_user
-        jwt_payload = JWT.decode(request.headers['token'], Rails.application.credentials.fetch(:secret_key_base)).first
+        jwt_payload = JWT.decode(request.headers['token'], Rails.application.credentials.secret_key_base)
         current_user = User.find(jwt_payload['sub'])
         if current_user
             return current_user
