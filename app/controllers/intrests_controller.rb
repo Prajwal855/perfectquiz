@@ -36,26 +36,21 @@ class IntrestsController < ApplicationController
     end
 
     def create
-        if current_user.academic.present?
-            if current_user.role == 'admin'
-                intrest = Intrest.create(intrest_params)
-                if intrest.save
-                    render json: {
-                        message: "Intrest Created successfully",
-                        intrest: intrest.as_json(only: [:id, :name])
-                    }, status: :created
-                else
-                    render json: {
-                        message: "Intrest Unable to Create",
-                        error: intrest.errors.full_messages
-                    }, status: 422
-                end
+        if current_user.admin?
+            intrest = Intrest.create(intrest_params)
+            if intrest.save
+                render json: {
+                    message: "Intrest Created successfully",
+                    intrest: intrest.as_json(only: [:id, :name])
+                }, status: :created
             else
-                render json: { message: "Dude You Don't have permission"
-                    }, status: 401
+                render json: {
+                    message: "Intrest Unable to Create",
+                    error: intrest.errors.full_messages
+                }, status: 422
             end
         else
-            render json: { message: "Dude Complete the Academic Form First"
+            render json: { message: "Dude You Don't have permission"
                 }, status: 401
         end
     end

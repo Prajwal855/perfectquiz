@@ -3,10 +3,8 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   respond_to :json
   private
-  def respond_with(resource, opts = {})
-    resource.name = params[:user][:name]
-    resource.role = params[:user][:role]
-    resource.phonenumber = params[:user][:phonenumber]
+  def create
+    build_resource(sign_up_params)
     resource.save
     if resource.persisted?
       Twilio::SmsService.new(to: resource.phonenumber, pin: '').send_otp
@@ -22,6 +20,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def sign_up_params
+      params.require(:user).permit(:email, :name, :password, :role, :phonenumber)
+  end
 #   def new
 #     super do |resource|
 #     resource.name = params[:user][:name]

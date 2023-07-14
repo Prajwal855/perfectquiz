@@ -36,26 +36,21 @@ class QualificationsController < ApplicationController
     end
 
     def create
-        if current_user.academic.present?
-            if current_user.role == 'admin'
-                qualification = Qualification.create(qualification_params)
-                if qualification.save
-                    render json: {
-                        message: "Qualification Created successfully",
-                        qualification: qualification.as_json(only: [:id, :name])
-                    }, status: :created
-                else
-                    render json: {
-                        message: "Qualification Unable to Create",
-                        error: qualification.errors.full_messages
-                    }, status: 422
-                end
+        if current_user.admin?
+            qualification = Qualification.create(qualification_params)
+            if qualification.save
+                render json: {
+                    message: "Qualification Created successfully",
+                    qualification: qualification.as_json(only: [:id, :name])
+                }, status: :created
             else
-                render json: { message: "Dude You Don't have permission"
-                    }, status: 401
+                render json: {
+                    message: "Qualification Unable to Create",
+                    error: qualification.errors.full_messages
+                }, status: 422
             end
         else
-            render json: { message: "Dude Complete the Academic Form First"
+            render json: { message: "Dude You Don't have permission"
                 }, status: 401
         end
     end
