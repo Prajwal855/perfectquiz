@@ -2,7 +2,7 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   respond_to :json
-  def create
+  def respond_with(resource,opt={})
       build_resource(sign_up_params)
         if resource.valid?
             resource.save

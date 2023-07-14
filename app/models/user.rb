@@ -14,12 +14,12 @@ class User < ApplicationRecord
 
   validates :role, presence: true
 
-  enum role: { user: "user", admin: "admin", teacher: "teacher"}
+  enum role: { student: "student", admin: "admin", teacher: "teacher"}
 
   before_validation :set_default_role
 
   private
   def set_default_role
-    self.role ||= "user"
+    self.role ||= "student"
   end
 end

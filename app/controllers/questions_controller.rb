@@ -65,7 +65,7 @@ class QuestionsController < BaseController
 
     def submit_answers
         if current_user.academic.present?
-            if current_user.role == "user"
+            if current_user.role == "student"
                 submitted_answers = params[:answers]
             
                 total_questions = submitted_answers.length
