@@ -1,4 +1,4 @@
-class ChaptersController < ApplicationController
+class ChaptersController < BaseController
     before_action :current_user
     def index
         if current_user.academic.present?
@@ -120,12 +120,5 @@ class ChaptersController < ApplicationController
 
     def chapter_params
         params.require(:chapter).permit(:chap,:course_id)
-    end
-    def current_user
-        jwt_payload = JWT.decode(request.headers['token'], Rails.application.credentials.secret_key_base)
-        current_user = User.find(jwt_payload['sub'])
-        if current_user
-            return current_user
-        end
     end
 end

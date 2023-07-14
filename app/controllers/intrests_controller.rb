@@ -96,12 +96,4 @@ class IntrestsController < ApplicationController
             return intrest
         end
     end
-
-    def current_user
-        jwt_payload = JWT.decode(request.headers['token'], Rails.application.credentials.secret_key_base)
-        current_user = User.find(jwt_payload['sub'])
-        if current_user
-            return current_user
-        end
-    end
 end

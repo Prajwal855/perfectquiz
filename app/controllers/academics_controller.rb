@@ -1,4 +1,4 @@
-class AcademicsController < ApplicationController
+class AcademicsController < BaseController
     before_action :current_user
 
     def index
@@ -43,13 +43,5 @@ class AcademicsController < ApplicationController
         params.permit(:college_name, :intrest_id, :qualification_id,
             :career_goals, :language, :other_language, :specialization,:currently_working,
             :availability,:experiance, :user_id, :cv, :governament_id)
-    end
-
-    def current_user
-        jwt_payload = JWT.decode(request.headers['token'], Rails.application.credentials.secret_key_base)
-        current_user = User.find(jwt_payload['sub'])
-        if current_user
-            return current_user
-        end
     end
 end

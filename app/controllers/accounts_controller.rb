@@ -1,12 +1,11 @@
-class AccountsController < ApplicationController
-    skip_before_action :verify_authenticity_token
+class AccountsController < BaseController
   
     def sms_confirm
-        jwt_payload = JWT.decode(request.headers['token'], Rails.application.credentials.secret_key_base)
+        jwt_payload = JWT.decode(request.headers['token'], ENV['secret_key_base']).first
         current_user = User.find(jwt_payload['sub'])
         sms_service = Twilio::SmsService.new(to: current_user.phonenumber, pin: sms_verification_params[:pin])
         verification_check = sms_service.verify_otp
-        token = request.headers['token'], Rails.application.credentials.secret_key_base
+        token = request.headers['token'], ENV['secret_key_base']
         if verification_check == {:status=>"approved"}
             current_user.update(otp_verified: true)
             render json: {
@@ -23,6 +22,6 @@ class AccountsController < ApplicationController
     private
   
     def sms_verification_params
-      params.require(:verify).permit(:pin)
+      params.permit(:pin)
     end
 end

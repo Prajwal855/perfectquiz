@@ -30,7 +30,7 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def respond_to_on_destroy
-    jwt_payload = JWT.decode(request.headers['token'], Rails.application.credentials.fetch(:secret_key_base)).first
+    jwt_payload = JWT.decode(request.headers['token'], ENV['secret_key_base']).first
     current_user = User.find(jwt_payload['sub'])
     if current_user
       render json: {
@@ -44,6 +44,8 @@ class Users::SessionsController < Devise::SessionsController
       }, status: :unauthorized
     end
   end
+
+  
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
@@ -57,9 +59,6 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  # end
 
   # protected
 
