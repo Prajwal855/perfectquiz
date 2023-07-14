@@ -8,4 +8,6 @@ class Academic < ApplicationRecord
   validates :college_name, :intrest_id, :qualification_id,
    :career_goals, :language, :other_language, :specialization,
     :experiance, :user_id, presence: true
+
+  validates_uniqueness_of :user_id
 end

@@ -41,7 +41,7 @@ class ChoicesController < BaseController
     end
 
     def create
-        if current_user.academic.present?
+        if current_user.admin? || current_user.role == "admin" || current_user.role == "teacher"
             choice = Choice.create(choice_params)
             if choice.save
                 render json: {
@@ -55,7 +55,7 @@ class ChoicesController < BaseController
                 }, status: 422
             end
         else
-            render json: { message: "Dude Complete the Academic Form First"
+            render json: { message: "Dude You Don't Have Permission"
                 }, status: 401
         end
     end

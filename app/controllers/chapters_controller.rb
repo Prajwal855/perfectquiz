@@ -62,27 +62,22 @@ class ChaptersController < BaseController
     end
 
     def create
-        if current_user.academic.present?
-            if current_user.role == "admin" || current_user.role == "teacher"
-                chapter = Chapter.create(chapter_params)
-                if chapter.save
-                    render json: {
-                        message: "Chapter Created Successfully",
-                        chapter: chapter.as_json(only: [:chap, :course_id])
-                    }, status: :created
-                else
-                    render json: {
-                        message: "Chapter cannot be Created",
-                        error: chapter.errors.full_messages
-                    }, status: 422
-                end
+        if current_user.admin? || current_user.role == "admin" || current_user.role == "teacher"
+            chapter = Chapter.create(chapter_params)
+            if chapter.save
+                render json: {
+                    message: "Chapter Created Successfully",
+                    chapter: chapter.as_json(only: [:chap, :course_id])
+                }, status: :created
             else
-                render json: { message: "Dude You Don't have permission"
-                }, status: 401
+                render json: {
+                    message: "Chapter cannot be Created",
+                    error: chapter.errors.full_messages
+                }, status: 422
             end
         else
-            render json: { message: "Dude Complete the Academic Form First"
-                }, status: 401
+            render json: { message: "Dude You Don't have permission"
+            }, status: 401
         end
     end
 

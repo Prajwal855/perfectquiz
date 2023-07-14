@@ -1,4 +1,4 @@
-class StudymaterialsController < ApplicationController
+class StudymaterialsController < BaseController
     before_action :current_user
     def index
         if current_user.academic.present?
@@ -40,52 +40,42 @@ class StudymaterialsController < ApplicationController
     end
 
     def create
-        if current_user.academic.present?
-            if current_user.role == "admin" || current_user.role == "teacher"
-                studymaterial = Studymaterial.create(studymaterial_params)
-                if studymaterial.save
-                    render json: {
-                        message: "Studymaterial Created Successfully",
-                        studymaterial: StudymaterialSerializer.new(studymaterial)
-                    }, status: :created
-                else
-                    render json: {
-                        message: "Studymaterial cannot be Created",
-                        error: studymaterial.errors.full_messages
-                    }, status: 422
-                end
+        if current_user.admin? || current_user.role == "admin" || current_user.role == "teacher"
+            studymaterial = Studymaterial.create(studymaterial_params)
+            if studymaterial.save
+                render json: {
+                    message: "Studymaterial Created Successfully",
+                    studymaterial: StudymaterialSerializer.new(studymaterial)
+                }, status: :created
             else
-                render json: { message: "Dude You Don't have permission"
-                }, status: 401
+                render json: {
+                    message: "Studymaterial cannot be Created",
+                    error: studymaterial.errors.full_messages
+                }, status: 422
             end
         else
-            render json: { message: "Dude Complete the Academic Form First"
-                }, status: 401
+            render json: { message: "Dude You Don't have permission"
+            }, status: 401
         end
     end
 
     def destroy
-        if current_user.academic.present?
-            if current_user.role == "admin" || current_user.role == "teacher"
-                studymaterial = set_studymaterial
-                if studymaterial.delete
-                    render json: {
-                        message: "Studymaterial Deleted Successfully",
-                        Studymaterial: StudymaterialSerializer.new(studymaterial)
-                    }, status: :ok
-                else
-                    render json: {
-                        message: "Studymaterial Cannot Be Deleted",
-                        error: studymaterial.errors.full_messages
-                    }, status: 422
-                end
+        if current_user.admin? || current_user.role == "admin" || current_user.role == "teacher"
+            studymaterial = set_studymaterial
+            if studymaterial.delete
+                render json: {
+                    message: "Studymaterial Deleted Successfully",
+                    Studymaterial: StudymaterialSerializer.new(studymaterial)
+                }, status: :ok
             else
-                render json: { message: "Dude You Don't have permission"
-                }, status: 401
+                render json: {
+                    message: "Studymaterial Cannot Be Deleted",
+                    error: studymaterial.errors.full_messages
+                }, status: 422
             end
         else
-            render json: { message: "Dude Complete the Academic Form First"
-                }, status: 401
+            render json: { message: "Dude You Don't have permission"
+            }, status: 401
         end
     end
     private

@@ -1,4 +1,4 @@
-class IntrestsController < ApplicationController
+class IntrestsController < BaseController
     before_action :current_user
     def index 
         intrests = Intrest.all
@@ -36,7 +36,7 @@ class IntrestsController < ApplicationController
     end
 
     def create
-        if current_user.admin?
+        if current_user.admin? || current_user.role == "admin"
             intrest = Intrest.create(intrest_params)
             if intrest.save
                 render json: {
@@ -56,26 +56,21 @@ class IntrestsController < ApplicationController
     end
 
     def destroy
-        if current_user.academic.present?
-            if current_user.role == 'admin'
-                intrest = set_intrest
-                if intrest.delete
-                    render json: {
-                        message: "Intrest Deleted Successfully",
-                        intrest: intrest.as_json(only: [:id, :name])
-                    }, status: :ok
-                else
-                    render json: {
-                        message: "Intrest unable to Delete",
-                        error: intrest.errors.full_messages
-                    }, status: 422
-                end
+        iif current_user.admin? || current_user.role == "admin"
+            intrest = set_intrest
+            if intrest.delete
+                render json: {
+                    message: "Intrest Deleted Successfully",
+                    intrest: intrest.as_json(only: [:id, :name])
+                }, status: :ok
             else
-                render json: { message: "Dude You Don't have permission"
-                    }, status: 401
+                render json: {
+                    message: "Intrest unable to Delete",
+                    error: intrest.errors.full_messages
+                }, status: 422
             end
         else
-            render json: { message: "Dude Complete the Academic Form First"
+            render json: { message: "Dude You Don't have permission"
                 }, status: 401
         end
     end

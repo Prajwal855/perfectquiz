@@ -1,4 +1,4 @@
-class QuestionsController < ApplicationController
+class QuestionsController < BaseController
     before_action :current_user
 
     def index 
@@ -99,7 +99,7 @@ class QuestionsController < ApplicationController
     end
 
     def create
-        if current_user.academic.present?
+        if current_user.admin?
             if current_user.role == "admin" || current_user.role == "teacher"
                 question = Question.create(question_params)
                 if question.save
@@ -118,7 +118,7 @@ class QuestionsController < ApplicationController
                     }, status: 401
             end
         else
-            render json: { message: "Dude Complete the Academic Form First"
+            render json: { message: "Dude You Don't have permission"
                 }, status: 401
         end
     end

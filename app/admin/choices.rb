@@ -5,7 +5,7 @@ ActiveAdmin.register Choice do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :option, :question_id
+  permit_params :option, :question_id, as: :select, collection: Question.pluck(:id)
   #
   # or
   #
@@ -14,11 +14,11 @@ ActiveAdmin.register Choice do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  permit_params :option, :question_id
+  # permit_params :option, :question_id
 
   # form do|f|
   #   f.input :option
-  #   f.input :question_id
+  #   f.input :question_id, as: :select, collection: Question.pluck(:que,:id)
   #   f.actions
   # end
 end

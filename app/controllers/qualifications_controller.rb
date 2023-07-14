@@ -1,4 +1,4 @@
-class QualificationsController < ApplicationController
+class QualificationsController < BaseController
     before_action :current_user
     def index 
         qualifications = Qualification.all
@@ -36,7 +36,7 @@ class QualificationsController < ApplicationController
     end
 
     def create
-        if current_user.admin?
+        if current_user.admin? || current_user.role == "admin"
             qualification = Qualification.create(qualification_params)
             if qualification.save
                 render json: {
@@ -57,26 +57,21 @@ class QualificationsController < ApplicationController
 
 
     def destroy
-        if current_user.academic.present?
-            if current_user.role == 'admin'
-                qualification = set_qualification
-                if qualification.delete
-                    render json: {
-                        message: "Qualification Deleted Successfully",
-                        qualification: qualification.as_json(only: [:id, :name])
-                    }, status: :ok
-                else
-                    render json: {
-                        message: "Qualification unable to Delete",
-                        error: qualification.errors.full_messages
-                    }, status: 422
-                end
+        if current_user.admin? || current_user.role == "admin"
+            qualification = set_qualification
+            if qualification.delete
+                render json: {
+                    message: "Qualification Deleted Successfully",
+                    qualification: qualification.as_json(only: [:id, :name])
+                }, status: :ok
             else
-                render json: { message: "Dude You Don't have permission"
-                    }, status: 401
+                render json: {
+                    message: "Qualification unable to Delete",
+                    error: qualification.errors.full_messages
+                }, status: 422
             end
         else
-            render json: { message: "Dude Complete the Academic Form First"
+            render json: { message: "Dude You Don't have permission"
                 }, status: 401
         end
     end

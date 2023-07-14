@@ -42,6 +42,6 @@ class AcademicsController < BaseController
     def academics_params
         params.permit(:college_name, :intrest_id, :qualification_id,
             :career_goals, :language, :other_language, :specialization,:currently_working,
-            :availability,:experiance, :user_id, :cv, :governament_id)
+            :availability,:experiance, :cv, :governament_id).merge(user_id: current_user.id)
     end
 end
