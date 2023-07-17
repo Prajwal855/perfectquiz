@@ -16,12 +16,24 @@ ActiveAdmin.register Question do
   # end
   permit_params :que, :correct_answer, :level, :language
 
-  # form do|f|
-  #   f.input :que
-  #   f.input :correct_answer
-  #   f.input :level
-  #   f.input :language
-  #   f.actions
-  # end
+  index do
+    selectable_column
+    id_column
+    column :que
+    column :correct_answer
+    column :level
+    column :language
+    actions
+   end
+
+  form do|f|
+    f.inputs "Question" do
+      f.input :que
+      f.input :correct_answer
+      f.input :level
+      f.input :language
+    end
+    f.actions
+  end
   
 end

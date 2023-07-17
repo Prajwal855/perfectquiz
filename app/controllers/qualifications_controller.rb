@@ -1,5 +1,5 @@
 class QualificationsController < BaseController
-    before_action :current_user
+    before_action :logged_in_user
     def index 
         qualifications = Qualification.all
         if  qualifications.empty?
@@ -16,7 +16,7 @@ class QualificationsController < BaseController
     end
 
     def show
-        if current_user.academic.present?
+        if logged_in_user.academic.present?
             qualification = set_qualification
             if qualification
                 render json: {
@@ -36,7 +36,7 @@ class QualificationsController < BaseController
     end
 
     def create
-        if current_user.admin? || current_user.role == "admin"
+        if logged_in_user.admin? || logged_in_user.role == "admin"
             qualification = Qualification.create(qualification_params)
             if qualification.save
                 render json: {
@@ -57,7 +57,7 @@ class QualificationsController < BaseController
 
 
     def destroy
-        if current_user.admin? || current_user.role == "admin"
+        if logged_in_user.admin? || logged_in_user.role == "admin"
             qualification = set_qualification
             if qualification.delete
                 render json: {

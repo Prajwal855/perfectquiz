@@ -5,7 +5,11 @@ ActiveAdmin.register Chapter do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :chap, :course_id, as: :select, collection: Course.pluck(:id)
+  # form do|f|
+  #   f.input :chap
+  #   f.input :course_id, as: :select, collection: Course.pluck(:modul)
+  # end
+  permit_params :course_id, :chap
   #
   # or
   #
@@ -14,10 +18,22 @@ ActiveAdmin.register Chapter do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  
-  form do|f|
-    f.input :chap
-    f.input :course_id, as: :select, collection: Course.pluck(:id)
+
+  form do |f|
+    f.inputs "Chapters Detail" do
+      f.input :chap
+      f.input :course_id, as: :select, collection: Course.pluck(:modul, :id)
+    end
     f.actions
   end
+
+
+
+
+  index do
+    selectable_column
+    id_column
+    column :chap
+    actions
+   end
 end

@@ -5,7 +5,14 @@ ActiveAdmin.register Choice do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :option, :question_id, as: :select, collection: Question.pluck(:id)
+  permit_params :option, :question_id
+
+  index do
+    selectable_column
+    id_column
+    column :option
+    actions
+   end
   #
   # or
   #
@@ -16,9 +23,11 @@ ActiveAdmin.register Choice do
   # end
   # permit_params :option, :question_id
 
-  # form do|f|
-  #   f.input :option
-  #   f.input :question_id, as: :select, collection: Question.pluck(:que,:id)
-  #   f.actions
-  # end
+  form do|f|
+    f.inputs "Choice Details" do
+      f.input :option
+      f.input :question_id, as: :select, collection: Question.pluck(:que,:id)
+    end
+    f.actions
+  end
 end

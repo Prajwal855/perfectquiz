@@ -1,7 +1,7 @@
 class ChaptersController < BaseController
-    before_action :current_user
+    before_action :logged_in_user
     def index
-        if current_user.academic.present?
+        if logged_in_user.academic.present?
             chapters = Chapter.all
             if chapters.empty?
                 render json: {
@@ -34,7 +34,7 @@ class ChaptersController < BaseController
         end
     end
     def show
-        if current_user.academic.present?
+        if logged_in_user.academic.present?
             chapter = set_chapter
             if chapter
                   render json: {
@@ -62,7 +62,7 @@ class ChaptersController < BaseController
     end
 
     def create
-        if current_user.admin? || current_user.role == "admin" || current_user.role == "teacher"
+        if logged_in_user.admin? || logged_in_user.role == "admin" || logged_in_user.role == "teacher"
             chapter = Chapter.create(chapter_params)
             if chapter.save
                 render json: {
@@ -82,8 +82,8 @@ class ChaptersController < BaseController
     end
 
     def destroy
-        if current_user.academic.present?
-            if current_user.role == "admin" || current_user.role == "teacher"
+        if logged_in_user.academic.present?
+            if logged_in_user.role == "admin" || logged_in_user.role == "teacher"
                 chapter = set_chapter
                 if chapter.delete
                     render json: {

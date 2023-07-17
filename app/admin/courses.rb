@@ -6,6 +6,13 @@ ActiveAdmin.register Course do
   # Uncomment all parameters which should be permitted for assignment
   #
   permit_params :modul
+
+  index do
+    selectable_column
+    id_column
+    column :modul
+    actions
+   end
   #
   # or
   #
@@ -14,5 +21,12 @@ ActiveAdmin.register Course do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
+
+  form do|f|
+    f.inputs "Course Details" do
+      f.input :modul
+    end
+   f.actions
+  end
   
 end

@@ -5,7 +5,7 @@ ActiveAdmin.register Studymaterial do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :textbook, :chapter_id, as: :select, collection: Chapter.pluck(:id)
+  permit_params :textbook, :chapter_id, as: :select, collection: Chapter.pluck(:chap)
   #
   # or
   #
@@ -15,12 +15,20 @@ ActiveAdmin.register Studymaterial do
   #   permitted
   # end
 
+  index do
+    selectable_column
+    id_column
+    column :textbook
+    actions
+   end
+
   form do|f|
-    f.input :chapter_id, as: :select, collection: Chapter.pluck(:id)
-    f.input :video, as: :file
-    f.input :softcopy, as: :file
-    f.input :textbook
+    f.inputs "StudyMaterial " do
+      f.input :chapter_id, as: :select, collection: Chapter.pluck(:chap, :id)
+      f.input :video, as: :file
+      f.input :softcopy, as: :file
+      f.input :textbook
+    end
     f.actions
   end
-  
 end

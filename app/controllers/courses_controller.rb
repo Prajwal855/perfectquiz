@@ -1,7 +1,7 @@
 class CoursesController < BaseController
-    before_action :current_user
+    before_action :logged_in_user
     def index
-        if current_user.academic.present?
+        if logged_in_user.academic.present?
             courses = Course.all
             if courses.empty?
                 render json: {
@@ -21,7 +21,7 @@ class CoursesController < BaseController
     end
 
     def show
-        if current_user.academic.present?
+        if logged_in_user.academic.present?
             course = set_course
             if course
                 render json: {message: "Course Found",
@@ -40,7 +40,7 @@ class CoursesController < BaseController
     end
 
     def create
-        if current_user.admin? || current_user.role == "admin" || current_user.role == "teacher"
+        if logged_in_user.admin? || logged_in_user.role == "admin" || logged_in_user.role == "teacher"
             course = Course.create(course_params)
             if course.save
                 render json: {
@@ -60,7 +60,7 @@ class CoursesController < BaseController
     end
 
     def elastic_search
-        if current_user.academic.present?
+        if logged_in_user.academic.present?
             search = params[:course]
             courses = Course.where("modul like ?","%#{search}%")
             if courses
@@ -81,10 +81,10 @@ class CoursesController < BaseController
     end
 
     def destroy
-        if current_user.academic.present?
-            if current_user.role == "admin" || current_user.role == "teacher"
+        if logged_in_user.academic.present?
+            if logged_in_user.role == "admin" || logged_in_user.role == "teacher" || logged_in_user.admin?
                 course = set_course
-                if course.delete
+                if course.destroy
                     render json: {
                         message: "Course Deleted Successfully",
                         course: course.as_json(only: [:modul])

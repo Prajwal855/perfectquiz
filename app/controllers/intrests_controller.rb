@@ -1,5 +1,5 @@
 class IntrestsController < BaseController
-    before_action :current_user
+    before_action :logged_in_user
     def index 
         intrests = Intrest.all
         if  intrests.empty?
@@ -16,7 +16,7 @@ class IntrestsController < BaseController
     end
 
     def show
-        if current_user.academic.present?
+        if logged_in_user.academic.present?
             intrest = set_intrest
             if intrest
                 render json: {
@@ -36,7 +36,7 @@ class IntrestsController < BaseController
     end
 
     def create
-        if current_user.admin? || current_user.role == "admin"
+        if logged_in_user.admin? || logged_in_user.role == "admin"
             intrest = Intrest.create(intrest_params)
             if intrest.save
                 render json: {
@@ -56,7 +56,7 @@ class IntrestsController < BaseController
     end
 
     def destroy
-        iif current_user.admin? || current_user.role == "admin"
+        if logged_in_user.admin? || logged_in_user.role == "admin"
             intrest = set_intrest
             if intrest.delete
                 render json: {

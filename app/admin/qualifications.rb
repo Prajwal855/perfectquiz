@@ -6,6 +6,13 @@ ActiveAdmin.register Qualification do
   # Uncomment all parameters which should be permitted for assignment
   #
   permit_params :name
+
+  index do
+    selectable_column
+    id_column
+    column :name
+    actions
+   end
   #
   # or
   #
@@ -14,5 +21,12 @@ ActiveAdmin.register Qualification do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
+
+  form do|f|
+    f.inputs "Qualification Details" do
+      f.input :name
+    end
+    f.actions
+  end
   
 end

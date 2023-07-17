@@ -1,7 +1,7 @@
 class ChoicesController < BaseController
-    before_action :current_user
+    before_action :logged_in_user
     def index 
-        if current_user.academic.present?
+        if logged_in_user.academic.present?
             choices = Choice.all
             if  choices.empty?
                 render json: {
@@ -21,7 +21,7 @@ class ChoicesController < BaseController
     end
 
     def show
-        if current_user.academic.present?
+        if logged_in_user.academic.present?
             choice = set_choice
             if choice
                 render json: {
@@ -41,7 +41,7 @@ class ChoicesController < BaseController
     end
 
     def create
-        if current_user.admin? || current_user.role == "admin" || current_user.role == "teacher"
+        if logged_in_user.admin? || logged_in_user.role == "admin" || logged_in_user.role == "teacher"
             choice = Choice.create(choice_params)
             if choice.save
                 render json: {
@@ -61,7 +61,7 @@ class ChoicesController < BaseController
     end
 
     def update
-        if current_user.academic.present?
+        if logged_in_user.academic.present?
             choice = set_choice
             if choice.update(choice_params)
                 render json: {
@@ -81,7 +81,7 @@ class ChoicesController < BaseController
     end
 
     def destroy
-        if current_user.academic.present?
+        if logged_in_user.academic.present?
             choice = set_choice
             if choice.delete
                 render json: {

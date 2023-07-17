@@ -1,5 +1,5 @@
 class AcademicsController < BaseController
-    before_action :current_user
+    before_action :logged_in_user
 
     def index
         academics = Academic.all

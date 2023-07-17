@@ -1,7 +1,7 @@
 class StudymaterialsController < BaseController
-    before_action :current_user
+    before_action :logged_in_user
     def index
-        if current_user.academic.present?
+        if logged_in_user.academic.present?
             studymaterials = Studymaterial.all
             if studymaterials.empty?
                 render json: {
@@ -21,7 +21,7 @@ class StudymaterialsController < BaseController
     end
 
     def show
-        if current_user.academic.present?
+        if logged_in_user.academic.present?
             studymaterial = set_studymaterial
             if studymaterial
                 render json: {message: "Studymaterial Found",
@@ -40,7 +40,7 @@ class StudymaterialsController < BaseController
     end
 
     def create
-        if current_user.admin? || current_user.role == "admin" || current_user.role == "teacher"
+        if logged_in_user.admin? || logged_in_user.role == "admin" || logged_in_user.role == "teacher"
             studymaterial = Studymaterial.create(studymaterial_params)
             if studymaterial.save
                 render json: {
@@ -60,7 +60,7 @@ class StudymaterialsController < BaseController
     end
 
     def destroy
-        if current_user.admin? || current_user.role == "admin" || current_user.role == "teacher"
+        if logged_in_user.admin? || logged_in_user.role == "admin" || logged_in_user.role == "teacher"
             studymaterial = set_studymaterial
             if studymaterial.delete
                 render json: {

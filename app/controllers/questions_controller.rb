@@ -1,8 +1,8 @@
 class QuestionsController < BaseController
-    before_action :current_user
+    before_action :logged_in_user
 
     def index 
-        if current_user.academic.present?
+        if logged_in_user.academic.present?
             questions = Question.all
             if questions.empty?
                 render json: {
@@ -22,7 +22,7 @@ class QuestionsController < BaseController
     end
 
     def show
-        if current_user.academic.present?
+        if logged_in_user.academic.present?
             question = set_question
             if question
                 render json: {
@@ -42,7 +42,7 @@ class QuestionsController < BaseController
     end
 
     def filtered_questions
-        if current_user.academic.present?
+        if logged_in_user.academic.present?
             difficult = params[:difficult]
             lang = params[:lang]
             @questions = Question.where("language like ? AND level like ?","%#{lang}%","%#{difficult}%" )
@@ -64,8 +64,8 @@ class QuestionsController < BaseController
     end
 
     def submit_answers
-        if current_user.academic.present?
-            if current_user.role == "student"
+        if logged_in_user.academic.present?
+            if logged_in_user.role == "student"
                 submitted_answers = params[:answers]
             
                 total_questions = submitted_answers.length
@@ -99,8 +99,8 @@ class QuestionsController < BaseController
     end
 
     def create
-        if current_user.admin?
-            if current_user.role == "admin" || current_user.role == "teacher"
+        if logged_in_user.admin?
+            if logged_in_user.role == "admin" || logged_in_user.role == "teacher"
                 question = Question.create(question_params)
                 if question.save
                     render json: {
@@ -124,7 +124,7 @@ class QuestionsController < BaseController
     end
 
     def update
-        if current_user.academic.present?
+        if logged_in_user.academic.present?
             question = set_question
             if question.update(question_params)
                 render json: {
@@ -149,7 +149,7 @@ class QuestionsController < BaseController
     end
 
     def submited_answer
-        params.require(:submite_answer).permit(:question_id, :answer) 
+        params.require(:submit_answer).permit(:question_id, :answer) 
     end
 
     def set_question
