@@ -120,6 +120,7 @@ GEM
       activesupport
     concurrent-ruby (1.2.2)
     crass (1.0.6)
+    csv (3.2.7)
     date (3.3.3)
     debug (1.8.0)
       irb (>= 1.5.0)
@@ -292,6 +293,9 @@ GEM
       actionpack (>= 5.2)
       railties (>= 5.2)
     rexml (3.2.5)
+    roo (2.10.0)
+      nokogiri (~> 1)
+      rubyzip (>= 1.3.0, < 3.0.0)
     rspec-core (3.12.2)
       rspec-support (~> 3.12.0)
     rspec-expectations (3.12.3)
@@ -385,6 +389,7 @@ DEPENDENCIES
   bootsnap
   cancancan
   capybara
+  csv
   debug
   devise
   devise-jwt
@@ -399,6 +404,7 @@ DEPENDENCIES
   rack-cors
   rails (~> 7.0.5)
   redis (~> 4.0)
+  roo
   rspec-rails
   sassc
   searchkick

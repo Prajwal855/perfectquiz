@@ -26,6 +26,8 @@ gem "aws-sdk-s3"
 gem 'dotenv-rails'
 gem "searchkick"
 gem "elasticsearch"
+gem 'roo' 
+gem 'csv'
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
