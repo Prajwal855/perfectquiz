@@ -14,7 +14,7 @@ ActiveAdmin.register Question do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
-  permit_params :que, :correct_answer, :level, :language
+  permit_params :que, :correct_answer, :level, :language, :option
 
   index do
     selectable_column
@@ -30,10 +30,23 @@ ActiveAdmin.register Question do
     f.inputs "Question" do
       f.input :que
       f.input :correct_answer
-      f.input :level
-      f.input :language
+      f.input :level, as: :select, collection: ['level1','level2','level3'], include_blank: false
+      f.input :language, as: :select, collection: ['Ruby','ReactJS','ReactNative'], include_blank: false
     end
-    f.actions
-  end
-  
+     f.inputs "choices" do
+      f.has_many :choices, allow_destroy: true, new_record: 'Add Option' do |o|
+       o.input :option
+      end
+     end
+     f.actions
+    end
+   
+    before_create do |question|
+     if question.level.present? && !['level_1', 'level_2', 'level_3'].include?(question.level)
+      question.errors.add(:level, "can only be level_1, level_2, or level_3")
+      throw :abort
+     end
+    end
 end
+
+  
