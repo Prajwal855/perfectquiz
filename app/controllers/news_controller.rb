@@ -1,5 +1,6 @@
-# app/controllers/news_controller.rb
 class NewsController < ApplicationController
+    before_action :logged_in_user
+    
     def top_headlines
       news_service = NewsService.new
       @articles = news_service.get_top_headlines(news_params.to_h)
