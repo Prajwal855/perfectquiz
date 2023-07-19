@@ -13,7 +13,7 @@ ActiveAdmin.register Intrest do
 
  member_action :download_csv, method: :get do
   intrest = Intrest.find(params[:id])
-  send_data intrest.to_csv, filename: "inerest_#{intrest.id}.csv"
+  send_data intrest.to_csv, filename: "intrest_#{intrest.id}.csv"
  end
 
  action_item :import_csv, only: :index do

@@ -28,6 +28,8 @@ gem "searchkick"
 gem "elasticsearch"
 gem 'roo' 
 gem 'csv'
+gem 'news-api'
+gem 'httparty'
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"

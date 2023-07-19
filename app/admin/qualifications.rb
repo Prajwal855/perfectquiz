@@ -34,7 +34,7 @@ ActiveAdmin.register Qualification do
 
   member_action :download_csv, method: :get do
     qualification = Qualification.find(params[:id])
-    send_data qualification.to_csv, filename: "qualification_#{ualification.id}.csv"
+    send_data qualification.to_csv, filename: "qualification_#{qualification.id}.csv"
    end
   
    action_item :import_csv, only: :index do

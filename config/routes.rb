@@ -7,6 +7,15 @@ Rails.application.routes.draw do
  # sms Verification Endponit
   post 'users/sms_confirmation', to: 'accounts#sms_confirm'
 
+  # top_headlines endpoint
+  get '/top_headlines', to: 'news#top_headlines'
+
+  # all_articles API call
+  get '/all_articles', to: 'news#all_articles'
+
+  # sources API call
+  get '/sources', to: 'news#sources'
+
  # intrest endpoint
   get "intrests", to: "intrests#index"
   get "intrest/:id", to: "intrests#show"

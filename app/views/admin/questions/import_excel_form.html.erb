@@ -1,0 +1,8 @@
+<!-- app/views/admin/questions/import_excel.html.erb -->
+<%= form_for @question, url: import_excel_admin_questions_path, method: :post, html: { multipart: true } do |f| %>
+ <div class="field">
+  <%= label_tag :excel_file, 'Excel File' %>
+  <%= f.file_field :excel_file, accept: '.xlsx' %>
+ </div>
+ <%= f.submit 'Import Excel' %>
+<% end %>
