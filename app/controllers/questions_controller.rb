@@ -45,7 +45,7 @@ class QuestionsController < BaseController
         if logged_in_user.academic.present?
             difficult = params[:difficult]
             lang = params[:lang]
-            @questions = Question.where("language like ? AND level like ?","%#{lang}%","%#{difficult}%" )
+            @questions = Question.where("language like ? AND level like ?","%#{lang}%","%#{difficult}%" ).order("RANDOM()").limit(25)
             if @questions.empty?
                 render json: {
                     message: "No Questions Found With the #{params[:difficult]} with #{params[:lang]}",

@@ -72,11 +72,11 @@ class UsersController < ActionController::Base
     end
     private
     def user_params
-        params.require(:user).permit(:name, :email, :password, :role)
+        params.require(:user).permit(:name, :email, :password, :role,:token)
     end
 
     def set_user
-        user = User.find_by(id: params[:id])
+        user = User.find(id: params[:id])
         if user
             return user
         end

@@ -18,7 +18,7 @@ gem "rack-cors"
 gem 'cancancan'
 gem "active_model_serializers"
 gem "fast_jsonapi"
-gem "activesupport"
+# gem "activesupport"
 gem "activeadmin"
 gem "sassc"
 gem "twilio-ruby"
@@ -30,6 +30,7 @@ gem 'roo'
 gem 'csv'
 gem 'news-api'
 gem 'httparty'
+gem "activesupport"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"

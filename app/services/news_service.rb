@@ -23,7 +23,6 @@ class NewsService
   def get_sources(options = {})
     endpoint = 'sources'
     query_params = options.merge(apiKey: @api_key)
-    debugger
     make_api_request(endpoint, query_params)
   end
 

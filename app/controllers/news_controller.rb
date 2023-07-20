@@ -1,5 +1,5 @@
 class NewsController < ApplicationController
-    before_action :logged_in_user
+    # before_action :logged_in_user
     
     def top_headlines
       news_service = NewsService.new
