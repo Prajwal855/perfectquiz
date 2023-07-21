@@ -7,6 +7,15 @@ ActiveAdmin.register User do
   #
   permit_params :name, :email, :encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at, :role, :jti, :phonenumber, :token
   #
+  index do
+    selectable_column
+    id_column
+    column :name
+    column :email
+    column :phonenumber
+    column :role
+    actions
+   end
   # or
   #
   # permit_params do

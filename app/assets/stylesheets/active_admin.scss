@@ -8,8 +8,12 @@
 // $sidebar-width: 242px;
 
 // Active Admin's got SASS!
+// @import "font-awesome";
+// @import "arctic_admin/base";
 @import "active_admin/mixins";
 @import "active_admin/base";
+
+// @import "components/*";
 // @import "components/component1";
 // @import "components/component2";
 // @import "arctic_admin/base";

@@ -18,6 +18,16 @@ class User < ApplicationRecord
 
   before_validation :set_default_role
 
+  def generate_token_expire_time
+    self.token_expiration_time = Time.now + 60.minutes
+    save!
+  end
+
+  def update_token_expire_time
+    self.token_expiration_time = Time.now + 60.minutes
+    save!
+  end
+
   private
   def set_default_role
     self.role ||= "student"

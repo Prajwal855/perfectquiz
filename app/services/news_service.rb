@@ -14,7 +14,6 @@ class NewsService
   end
 
   def get_all_articles(options = {})
-    debugger
     endpoint = 'everything'
     query_params = default_params.merge(options)
     make_api_request(endpoint, query_params)

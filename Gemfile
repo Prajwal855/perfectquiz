@@ -18,7 +18,6 @@ gem "rack-cors"
 gem 'cancancan'
 gem "active_model_serializers"
 gem "fast_jsonapi"
-# gem "activesupport"
 gem "activeadmin"
 gem "sassc"
 gem "twilio-ruby"
@@ -26,12 +25,16 @@ gem "aws-sdk-s3"
 gem 'dotenv-rails'
 gem "searchkick"
 gem "elasticsearch"
+gem 'kaminari'
+# gem 'arctic_admin'
+gem 'uglifier'
+gem 'coffee-rails'
 gem 'roo' 
 gem 'csv'
 gem 'news-api'
 gem 'httparty'
 gem "activesupport"
-
+gem "rufus-scheduler"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 

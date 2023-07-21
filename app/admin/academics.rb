@@ -19,12 +19,12 @@ ActiveAdmin.register Academic do
   :availability,:experiance, :user_id, :cv, :governament_id
 
 
-  index do
-    selectable_column
-    id_column
-    column :name
-    actions
-   end
+  # index do
+  #   selectable_column
+  #   id_column
+  #   column :college_name
+  #   actions
+  #  end
 
   form do|f|
     f.inputs "Acadmics Details" do

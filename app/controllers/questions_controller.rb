@@ -1,25 +1,39 @@
 class QuestionsController < BaseController
     before_action :logged_in_user
 
-    def index 
+    def index
         if logged_in_user.academic.present?
-            questions = Question.all
-            if questions.empty?
-                render json: {
-                    message: "Questions Not Found",
-                    questions: []
-                }, status: :not_found
-            else
-                render json: {
-                    message: "Questions Found",
-                    questions: questions
-                }, status: :ok
-            end
+          page = params[:page].to_i.positive? ? params[:page].to_i : 1
+          limit = params[:limit].to_i.positive? ? params[:limit].to_i : 100
+      
+          questions = Question.includes(:choices).limit(limit).offset((page - 1) * limit)
+      
+          total_questions = Question.count
+          total_pages = (total_questions.to_f / limit).ceil
+      
+          if questions.empty?
+            render json: {
+              message: "Questions Not Found",
+              questions: []
+            }, status: :not_found
+          else
+            render json: {
+              message: "Questions Retrived Successfully",
+              current_page: page,
+              total_pages: total_pages,
+              record: "#{questions.count} questions in current page",
+              total_questions: total_questions,
+              questions: questions,
+            }, status: :ok
+          end
         else
-            render json: { message: "Dude Complete the Academic Form First"
-                }, status: 401
+          render json: {
+            message: "Dude Complete the Academic Form First"
+          }, status: 401
         end
-    end
+      end
+      
+    
 
     def show
         if logged_in_user.academic.present?

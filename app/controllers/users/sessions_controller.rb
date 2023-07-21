@@ -6,6 +6,7 @@ class Users::SessionsController < Devise::SessionsController
   def respond_with(resource, _opts = {})
     if @user && @user.academic.present? && @user.valid_password?(params[:user][:password]) && @user.otp_verified == true && @user.token.present? == false
       sign_in @user
+      @user.generate_token_expire_time
       token = request.env['warden-jwt_auth.token']
       @user.update(token: token)
           response_data = {
@@ -35,6 +36,7 @@ class Users::SessionsController < Devise::SessionsController
     current_user = User.find(jwt_payload['sub'])
     if current_user && current_user.token.present? == true
       current_user.update(token: nil)
+      current_user.update_token_expire_time
       render json: {
         status: 200,
         message: "logged out successfully"
