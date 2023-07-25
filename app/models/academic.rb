@@ -6,7 +6,7 @@ class Academic < ApplicationRecord
   has_one_attached :cv
 
   validates :college_name, :intrest_id, :qualification_id,
-   :career_goals, :language, :other_language, :specialization, :governament_id, :cv,
+   :career_goals, :language, :other_language, :specialization,
     :experiance, :user_id, presence: true
 
   validates_uniqueness_of :user_id

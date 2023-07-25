@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_20_105445) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_24_073808) do
   create_table "academics", force: :cascade do |t|
     t.string "college_name"
     t.integer "intrest_id", null: false
@@ -84,6 +84,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_20_105445) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "chapters", force: :cascade do |t|
     t.string "chap"
     t.integer "course_id", null: false
@@ -104,6 +110,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_20_105445) do
     t.string "modul"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "category_id"
+    t.integer "subcategory_id"
+    t.index ["category_id"], name: "index_courses_on_category_id"
+    t.index ["subcategory_id"], name: "index_courses_on_subcategory_id"
   end
 
   create_table "intrests", force: :cascade do |t|
@@ -135,6 +145,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_20_105445) do
     t.index ["chapter_id"], name: "index_studymaterials_on_chapter_id"
   end
 
+  create_table "subcategories", force: :cascade do |t|
+    t.string "name"
+    t.integer "category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_subcategories_on_category_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -162,5 +180,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_20_105445) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "chapters", "courses"
   add_foreign_key "choices", "questions"
+  add_foreign_key "courses", "categories"
+  add_foreign_key "courses", "subcategories"
   add_foreign_key "studymaterials", "chapters"
+  add_foreign_key "subcategories", "categories"
 end

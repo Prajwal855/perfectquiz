@@ -61,12 +61,19 @@ class CoursesController < BaseController
 
     def elastic_search
         if logged_in_user.academic.present?
-            search = params[:course]
-            courses = Course.where("modul like ?","%#{search}%")
-            if courses
-                render json: {
-                    message: "Course Found In #{params[:course]} Successfully",
-                    course: courses.as_json(only: [:id,:modul], include: { chapters: { only: [:id,:chap] } })
+            user_modul = params[:course]
+            user_category_name = params[:category]
+            user_subcategory_name = params[:subcategory]
+            matching_courses = Course.joins(:category, :subcategory)
+                         .where("courses.modul LIKE ?", "%#{user_modul}%")
+                         .where(categories: { name: user_category_name })
+                         .where(subcategories: { name: user_subcategory_name })
+
+        
+            if matching_courses.any?
+                render json: { 
+                    message: "Courses Found Based on your Search",
+                    courses: matching_courses.as_json(only: [:id,:modul], include: { chapters: { only: [:id,:chap] } }) 
                 }, status: :ok
             else
                 render json: {
@@ -112,6 +119,6 @@ class CoursesController < BaseController
         end
     end
     def course_params
-        params.require(:course).permit(:modul)
+        params.require(:course).permit(:modul,:category_id, :subcategory_id)
     end
 end

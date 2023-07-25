@@ -5,28 +5,25 @@ ActiveAdmin.register Course do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :modul
+  permit_params :modul, :category_id, :subcategory_id
 
-  index do
-    selectable_column
-    id_column
-    column :modul
-    actions
-   end
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:modul]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
-
-  form do|f|
-    f.inputs "Course Details" do
+  form do |f|
+    f.inputs "Course" do
       f.input :modul
+      f.input :category, collection: Category.pluck(:name, :id)
+      category_id = f.object.category_id
+      subcategory_collection = Subcategory.where(category_id: category_id).pluck(:name, :id)
+      f.input :subcategory_id, as: :select, collection: subcategory_collection, include_blank: false, input_html: { disabled: category_id.blank? }, id: 'subcategory-select'
     end
-   f.actions
+    f.actions
+  end
+
+  controller do
+    def subcategory_options(category_id)
+      return [] if category_id.blank?
+
+      Subcategory.where(category_id: category_id).pluck(:name, :id)
+    end
   end
   
 end

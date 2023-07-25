@@ -1,5 +1,5 @@
 class AcademicsController < BaseController
-    before_action :logged_in_user
+    before_action :current_log
 
     def index
         academics = Academic.all
@@ -33,7 +33,7 @@ class AcademicsController < BaseController
 
     private
     def set_academic
-        academic = Academic.find_by(id: params[:id])
+        academic = Academic.find(id: params[:id])
         if academic
             return academic
         end

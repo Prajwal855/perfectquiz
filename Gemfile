@@ -23,8 +23,8 @@ gem "sassc"
 gem "twilio-ruby"
 gem "aws-sdk-s3"
 gem 'dotenv-rails'
-gem "searchkick"
-gem "elasticsearch"
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 gem 'kaminari'
 # gem 'arctic_admin'
 gem 'uglifier'
@@ -34,6 +34,7 @@ gem 'csv'
 gem 'news-api'
 gem 'httparty'
 gem "activesupport"
+gem 'jquery-rails'
 gem "rufus-scheduler"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"

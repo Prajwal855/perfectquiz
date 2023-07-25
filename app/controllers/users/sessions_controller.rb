@@ -6,6 +6,7 @@ class Users::SessionsController < Devise::SessionsController
   def respond_with(resource, _opts = {})
     if @user && @user.academic.present? && @user.valid_password?(params[:user][:password]) && @user.otp_verified == true && @user.token.present? == false
       sign_in @user
+      UserMailer.welcome_email(@user).deliver_now
       @user.generate_token_expire_time
       token = request.env['warden-jwt_auth.token']
       @user.update(token: token)

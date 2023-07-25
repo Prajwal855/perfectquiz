@@ -29,8 +29,8 @@ ActiveAdmin.register Academic do
   form do|f|
     f.inputs "Acadmics Details" do
       f.input :college_name
-      f.input :intrest_id
-      f.input :qualification_id
+      f.input :intrest_id, as: :select, collection: Intrest.pluck(:name, :id)
+      f.input :qualification_id, as: :select, collection: Qualification.pluck(:name, :id)
       f.input :career_goals
       f.input :language
       f.input :other_language

@@ -1,0 +1,5 @@
+<% if category_id.present? %>
+  <%= select :subcategory_id, collection: subcategory_options(category_id), include_blank: false, input_html: { disabled: category_id.blank? }, id: 'subcategory-select' %>
+<% else %>
+  <%= select :subcategory_id, collection: [], include_blank: false, input_html: { disabled: true }, id: 'subcategory-select' %>
+<% end %>

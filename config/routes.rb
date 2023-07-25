@@ -30,6 +30,18 @@ Rails.application.routes.draw do
   put "qualification/:id", to: "qualifications#update"
   delete "qualification/:id", to: "qualifications#destroy"
 
+  # categories endpoint
+  get "categories", to: "categories#index"
+  get "category/:id", to: "categories#show"
+  post "category", to: "categories#create"
+  delete "category/:id", to: "categories#destroy"
+
+  # subcategories endpoint
+  get "subcategories", to: "subcategories#index"
+  get "subcategory/:id", to: "subcategories#show"
+  post "subcategory", to: "subcategories#create"
+  delete "subcategory/:id", to: "subcategories#destroy"
+
  # academics endpoint
   get "academics", to: "academics#index"
   get "academic/:id", to: "academics#show"
