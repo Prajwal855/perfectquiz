@@ -6,7 +6,7 @@ RSpec.describe StudymaterialsController, type: :controller do
   include FactoryBot::Syntax::Methods
   let!(:admin_user) { create(:user, role: "admin") }
   let!(:academic_admin){ create(:academic, user: admin_user)}
-  let!(:user) { create(:user, role: "user") }
+  let!(:user) { create(:user, role: "student") }
   let!(:academic) { create(:academic, user: user)}
   let!(:studymaterial){ create(:studymaterial)}
 
@@ -71,9 +71,8 @@ RSpec.describe StudymaterialsController, type: :controller do
 
     payload = { sub: user_id, exp: expiration_time }
 
-    secret_key = Rails.application.credentials.fetch(:secret_key_base)
+    secret_key = ENV['secret_key_base']
     token = JWT.encode(payload, secret_key)
-
     token
   end
 end

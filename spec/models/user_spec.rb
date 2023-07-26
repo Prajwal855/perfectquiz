@@ -6,7 +6,7 @@ RSpec.describe User, type: :model do
 
   describe 'Validation' do
     it 'valid User Record' do 
-      user = build(:user, role: "user")
+      user = build(:user, role: "teacher")
          expect(user).to be_valid
       end
     it 'validates presence of Email' do
@@ -21,7 +21,7 @@ RSpec.describe User, type: :model do
       end
 
     it 'validates presence of Role' do
-      user = build(:user, role: "user")
+      user = build(:user, role: "teacher")
       expect(user).to be_valid
       end
     end

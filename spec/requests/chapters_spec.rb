@@ -7,7 +7,7 @@ RSpec.describe ChaptersController , type: :controller do
   include FactoryBot::Syntax::Methods
   let!(:admin_user) { create(:user, role: "admin") }
   let!(:academic_admin){ create(:academic, user: admin_user)}
-  let!(:user) { create(:user, role: "user") }
+  let!(:user) { create(:user, role: "student") }
   let!(:academic) { create(:academic, user: user)}
   let!(:chapter) { create(:chapter)}
   let!(:course){ create(:course)}
@@ -20,6 +20,7 @@ RSpec.describe ChaptersController , type: :controller do
     end
     it "returns  chapter" do
       expect(response).to have_http_status(200)
+      
     end
 
     it "returns not found when no chapter are available" do
@@ -89,7 +90,7 @@ RSpec.describe ChaptersController , type: :controller do
 
     payload = { sub: user_id, exp: expiration_time }
 
-    secret_key = Rails.application.credentials.fetch(:secret_key_base)
+    secret_key = ENV['secret_key_base']
     token = JWT.encode(payload, secret_key)
 
     token

@@ -3,7 +3,9 @@ class BaseController < ActionController::API
     def logged_in_user
         jwt_payload = JWT.decode(request.headers['token'], ENV['secret_key_base']).first
         @current_user = User.find(jwt_payload['sub'])
-        if @current_user.token.present?
+        @logged_user_token = request.headers['token']
+        if @current_user.token == @logged_user_token
+            debugger
             return @current_user
         else
             render json: {

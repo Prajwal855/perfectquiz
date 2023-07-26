@@ -11,7 +11,7 @@ class CoursesController < BaseController
             else
                 render json: {
                     message: "Courses Found",
-                    courses: courses.as_json(only: [:id,:modul], include: { chapters: { only: [:id,:chap] } })
+                    courses: courses
                 }, status: :ok
             end
         else
@@ -62,23 +62,28 @@ class CoursesController < BaseController
     def elastic_search
         if logged_in_user.academic.present?
             user_modul = params[:course]
-            user_category_name = params[:category]
-            user_subcategory_name = params[:subcategory]
-            matching_courses = Course.joins(:category, :subcategory)
-                         .where("courses.modul LIKE ?", "%#{user_modul}%")
-                         .where(categories: { name: user_category_name })
-                         .where(subcategories: { name: user_subcategory_name })
+            category_id = params[:category].to_i
+            subcategory_id = params[:subcategory].to_i
 
-        
+            matching_courses = case
+            when user_modul.present? && category_id > 0 && subcategory_id > 0
+                Course.where("modul LIKE ? AND category_id = ? AND subcategory_id = ?", "%#{user_modul}%", category_id, subcategory_id)
+            when user_modul.present? && category_id > 0
+                Course.where("modul LIKE ? AND category_id = ?", "%#{user_modul}%", category_id)
+            when user_modul.present? || category_id > 0 || subcategory_id > 0
+                Course.where("modul LIKE ? OR category_id = ? OR subcategory_id = ?", "%#{user_modul}%", category_id, subcategory_id)
+            else
+                Course.none
+            end
             if matching_courses.any?
                 render json: { 
                     message: "Courses Found Based on your Search",
-                    courses: matching_courses.as_json(only: [:id,:modul], include: { chapters: { only: [:id,:chap] } }) 
+                    courses: matching_courses 
                 }, status: :ok
             else
                 render json: {
                     message: "Course Not Found In #{params[:course]} Successfully",
-                    error: courses.errors.full_messages
+                    error: matching_courses.errors.full_messages
                 }, status: 422
             end
         else

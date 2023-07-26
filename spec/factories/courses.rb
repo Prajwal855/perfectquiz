@@ -1,5 +1,7 @@
 FactoryBot.define do
   factory :course do
-    modul { "MyString" }
+    modul { "Sample Module" }
+    association :category
+    association :subcategory
   end
 end
