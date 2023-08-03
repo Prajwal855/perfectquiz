@@ -1,5 +1,7 @@
 class ChaptersController < BaseController
-    before_action :logged_in_user
+    before_action :logged_in_user, only: [:index, :show]
+    before_action :check_admin_user, only: [:create, :destroy]
+
     def index
         chapters = Chapter.all
         if chapters.empty?
@@ -53,49 +55,50 @@ class ChaptersController < BaseController
     end
 
     def create
-        if logged_in_user.admin? || logged_in_user.role == "admin" || logged_in_user.role == "teacher"
-            chapter = Chapter.create(chapter_params)
-            if chapter.save
-                render json: {
-                    message: "Chapter Created Successfully",
-                    chapter: chapter.as_json(only: [:chap, :course_id])
-                }, status: :created
-            else
-                render json: {
-                    message: "Chapter cannot be Created",
-                    error: chapter.errors.full_messages
-                }, status: 422
-            end
+        chapter = Chapter.create(chapter_params)
+        if chapter.save
+            render json: {
+                message: "Chapter Created Successfully",
+                chapter: chapter.as_json(only: [:chap, :course_id])
+            }, status: :created
         else
-            render json: { message: "Dude You Don't have permission"
-            }, status: 401
+            render json: {
+                message: "Chapter cannot be Created",
+                error: chapter.errors.full_messages
+            }, status: 422
         end
     end
 
     def destroy
-        if logged_in_user.role == "admin" || logged_in_user.role == "teacher"
-            chapter = set_chapter
-            if chapter.delete
-                render json: {
-                    message: "Chapter Deleted Successfully",
-                    chapter: chapter.as_json(only: [:chap, :course_id])
-                }, status: :ok
-            else
-                render json: {
-                    message: "Chapter Cannot Be Deleted",
-                    error: chapter.errors.full_messages
-                }, status: 422
-            end
+        chapter = set_chapter
+        if chapter.delete
+            render json: {
+                message: "Chapter Deleted Successfully",
+                chapter: chapter.as_json(only: [:chap, :course_id])
+            }, status: :ok
         else
-            render json: { message: "Dude You Don't have permission"
-            }, status: 401
+            render json: {
+                message: "Chapter Cannot Be Deleted",
+                error: chapter.errors.full_messages
+            }, status: 422
         end
     end
+
+
     private
     def set_chapter
         chapter = Chapter.find_by(id: params[:id])
         if chapter
             return chapter
+        end
+    end
+
+    def check_admin_user
+        if logged_in_user.admin? || logged_in_user.role == "admin" || logged_in_user.role == "teacher"
+            return logged_in_user
+        else
+            render json: { message: "Dude You Don't have permission"
+             }, status: 401
         end
     end
 

@@ -23,11 +23,6 @@ class User < ApplicationRecord
     save!
   end
 
-  def update_token_expire_time
-    self.token_expiration_time = Time.now + 60.minutes
-    save!
-  end
-
   private
   def set_default_role
     self.role ||= "student"

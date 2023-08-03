@@ -1,7 +1,9 @@
 class CategoriesController < BaseController
-    before_action :logged_in_user
+    before_action :logged_in_user, only: [:index, :show]
+    before_action :check_admin_user, only: [:create, :destroy]
+
     def index 
-       categories =Category.all
+       categories = Category.all
         if categories.empty?
             render json: {
                 message:    "Categories Not Found",
@@ -31,48 +33,47 @@ class CategoriesController < BaseController
     end
 
     def create
-        if logged_in_user.admin? || logged_in_user.role == "admin"
-           category = Category.create(category_params)
-            if category.save
-                render json: {
-                    message: "Category Created successfully",
-                   category: category.as_json(only: [:id, :name])
-                }, status: :created
-            else
-                render json: {
-                    message: "Category Unable to Create",
-                    error:category.errors.full_messages
-                }, status: 422
-            end
+        category = Category.create(category_params)
+        if category.save
+            render json: {
+                message: "Category Created successfully",
+                category: category.as_json(only: [:id, :name])
+            }, status: :created
         else
-            render json: { message: "Dude You Don't have permission"
-                }, status: 401
+            render json: {
+                message: "Category Unable to Create",
+                error:category.errors.full_messages
+            }, status: 422
         end
     end
 
     def destroy
-        if logged_in_user.admin? || logged_in_user.role == "admin"
-           category = set_category
-            if category.delete
-                render json: {
-                    message: "Category Deleted Successfully",
-                   category: category.as_json(only: [:id, :name])
-                }, status: :ok
-            else
-                render json: {
-                    message: "Category unable to Delete",
-                    error:category.errors.full_messages
-                }, status: 422
-            end
+        category = set_category
+        if category.delete
+            render json: {
+                message: "Category Deleted Successfully",
+                category: category.as_json(only: [:id, :name])
+            }, status: :ok
         else
-            render json: { message: "Dude You Don't have permission"
-                }, status: 401
+            render json: {
+                message: "Category unable to Delete",
+                error:category.errors.full_messages
+            }, status: 422
         end
     end
 
     private
     def category_params
         params.require(:category).permit(:name)
+    end
+
+    def check_admin_user
+        if logged_in_user.admin? || logged_in_user.role == "admin"
+            return logged_in_user
+        else
+            render json: { message: "Dude You Don't have permission"
+             }, status: 401
+        end
     end
 
     def set_category

@@ -1,5 +1,6 @@
 class StudymaterialsController < BaseController
-    before_action :logged_in_user
+    before_action :logged_in_user, only: [:index, :show]
+    before_action :check_admin_user, only: [:create, :destroy]
     def index
         studymaterials = Studymaterial.all
         if studymaterials.empty?
@@ -30,42 +31,32 @@ class StudymaterialsController < BaseController
     end
 
     def create
-        if logged_in_user.admin? || logged_in_user.role == "admin" || logged_in_user.role == "teacher"
-            studymaterial = Studymaterial.create(studymaterial_params)
-            if studymaterial.save
-                render json: {
-                    message: "Studymaterial Created Successfully",
-                    studymaterial: StudymaterialSerializer.new(studymaterial)
-                }, status: :created
-            else
-                render json: {
-                    message: "Studymaterial cannot be Created",
-                    error: studymaterial.errors.full_messages
-                }, status: 422
-            end
+        studymaterial = Studymaterial.create(studymaterial_params)
+        if studymaterial.save
+            render json: {
+                message: "Studymaterial Created Successfully",
+                studymaterial: StudymaterialSerializer.new(studymaterial)
+            }, status: :created
         else
-            render json: { message: "Dude You Don't have permission"
-            }, status: 401
+            render json: {
+                message: "Studymaterial cannot be Created",
+                error: studymaterial.errors.full_messages
+            }, status: 422
         end
     end
 
     def destroy
-        if logged_in_user.admin? || logged_in_user.role == "admin" || logged_in_user.role == "teacher"
-            studymaterial = set_studymaterial
-            if studymaterial.delete
-                render json: {
-                    message: "Studymaterial Deleted Successfully",
-                    Studymaterial: StudymaterialSerializer.new(studymaterial)
-                }, status: :ok
-            else
-                render json: {
-                    message: "Studymaterial Cannot Be Deleted",
-                    error: studymaterial.errors.full_messages
-                }, status: 422
-            end
+        studymaterial = set_studymaterial
+        if studymaterial.delete
+            render json: {
+                message: "Studymaterial Deleted Successfully",
+                Studymaterial: StudymaterialSerializer.new(studymaterial)
+            }, status: :ok
         else
-            render json: { message: "Dude You Don't have permission"
-            }, status: 401
+            render json: {
+                message: "Studymaterial Cannot Be Deleted",
+                error: studymaterial.errors.full_messages
+            }, status: 422
         end
     end
     private
@@ -74,6 +65,15 @@ class StudymaterialsController < BaseController
         studymaterial = Studymaterial.find_by(id: params[:id])
         if studymaterial
             return studymaterial
+        end
+    end
+
+    def check_admin_user
+        if logged_in_user.admin? || logged_in_user.role == "admin" || logged_in_user.role == "teacher"
+            return logged_in_user
+        else
+            render json: { message: "Dude You Don't have permission"
+             }, status: 401
         end
     end
 

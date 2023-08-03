@@ -1,5 +1,6 @@
 class CoursesController < BaseController
-    before_action :logged_in_user
+    before_action :logged_in_user, only: [:index, :show]
+    before_action :check_admin_user, only: [:create, :destroy]
     
     def index
         courses = Course.all
@@ -31,22 +32,17 @@ class CoursesController < BaseController
     end
 
     def create
-        if logged_in_user.admin? || logged_in_user.role == "admin" || logged_in_user.role == "teacher"
-            course = Course.create(course_params)
-            if course.save
-                render json: {
-                    message: "Course Created Successfully",
-                    course: course
-                }, status: :created
-            else
-                render json: {
-                    message: "Course cannot be Created",
-                    error: course.errors.full_messages
-                }, status: 422
-            end
+        course = Course.create(course_params)
+        if course.save
+            render json: {
+                message: "Course Created Successfully",
+                course: course
+            }, status: :created
         else
-            render json: { message: "Dude You Don't have permission"
-            }, status: 401
+            render json: {
+                message: "Course cannot be Created",
+                error: course.errors.full_messages
+            }, status: 422
         end
     end
 
@@ -121,22 +117,17 @@ class CoursesController < BaseController
     end
 
     def destroy
-        if logged_in_user.role == "admin" || logged_in_user.role == "teacher" || logged_in_user.admin?
-            course = set_course
-            if course.destroy
-                render json: {
-                    message: "Course Deleted Successfully",
-                    course: course.as_json(only: [:modul])
-                }, status: :ok
-            else
-                render json: {
-                    message: "Course Cannot Be Deleted",
-                    error: course.errors.full_messages
-                }, status: 422
-            end
+        course = set_course
+        if course.destroy
+            render json: {
+                message: "Course Deleted Successfully",
+                course: course.as_json(only: [:modul])
+            }, status: :ok
         else
-            render json: { message: "Dude You Don't have permission"
-            }, status: 401
+            render json: {
+                message: "Course Cannot Be Deleted",
+                error: course.errors.full_messages
+            }, status: 422
         end
     end
     private
@@ -146,6 +137,16 @@ class CoursesController < BaseController
             return course
         end
     end
+
+    def check_admin_user
+        if logged_in_user.admin? || logged_in_user.role == "admin" || logged_in_user.role == "teacher"
+            return logged_in_user
+        else
+            render json: { message: "Dude You Don't have permission"
+             }, status: 401
+        end
+    end
+
     def course_params
         params.require(:course).permit(:modul,:category_id, :subcategory_id)
     end

@@ -11,6 +11,6 @@ class Ability
 
     return unless user.admin?  
     can :read, Post
-    end
   end
 end
+

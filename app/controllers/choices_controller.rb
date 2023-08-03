@@ -1,5 +1,7 @@
 class ChoicesController < BaseController
-    before_action :logged_in_user
+    before_action :logged_in_user, only: [:index, :show]
+    before_action :check_admin_user, only: [:create, :update, :destroy]
+
     def index 
         choices = Choice.all
         if  choices.empty?
@@ -31,22 +33,17 @@ class ChoicesController < BaseController
     end
 
     def create
-        if logged_in_user.admin? || logged_in_user.role == "admin" || logged_in_user.role == "teacher"
-            choice = Choice.create(choice_params)
-            if choice.save
-                render json: {
-                    message: "Choice Created successfully",
-                    choice: choice.as_json(only: [:id, :option, :question_id])
-                }, status: :created
-            else
-                render json: {
-                    message: "Choice Unable to Create",
-                    error: choice.errors.full_messages
-                }, status: 422
-            end
+        choice = Choice.create(choice_params)
+        if choice.save
+            render json: {
+                message: "Choice Created successfully",
+                choice: choice.as_json(only: [:id, :option, :question_id])
+            }, status: :created
         else
-            render json: { message: "Dude You Don't Have Permission"
-                }, status: 401
+            render json: {
+                message: "Choice Unable to Create",
+                error: choice.errors.full_messages
+            }, status: 422
         end
     end
 
@@ -83,6 +80,15 @@ class ChoicesController < BaseController
     private
     def choice_params
         params.require(:choice).permit(:option, :question_id)
+    end
+
+    def check_admin_user
+        if logged_in_user.admin? || logged_in_user.role == "admin" || logged_in_user.role == "teacher"
+            return logged_in_user
+        else
+            render json: { message: "Dude You Don't have permission"
+             }, status: 401
+        end
     end
 
     def set_choice

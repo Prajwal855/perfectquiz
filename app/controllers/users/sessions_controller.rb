@@ -35,7 +35,6 @@ class Users::SessionsController < Devise::SessionsController
     current_user = User.find(jwt_payload['sub'])
     if current_user && current_user.token.present? == true
       current_user.update(token: nil)
-      current_user.update_token_expire_time
       render json: {
         status: 200,
         message: "logged out successfully"
