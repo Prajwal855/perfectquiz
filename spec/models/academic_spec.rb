@@ -6,6 +6,8 @@ RSpec.describe Academic, type: :model do
     let(:intrest) {FactoryBot.create(:intrest)}
     let(:qualification) {FactoryBot.create(:qualification)}
     let(:academic) {FactoryBot.create(:academic)}
+
+    error_message = "can't be blank"
   
     describe 'Validation' do
       it 'valid Academic Record' do 
@@ -15,54 +17,54 @@ RSpec.describe Academic, type: :model do
       it 'validates presence of College Name' do
             academic = build(:academic, college_name: nil)
              expect(academic).not_to be_valid
-             expect(academic.errors[:college_name]).to include("can't be blank")
+             expect(academic.errors[:college_name]).to include(error_message)
         end
       it 'validates presence of Interest Id' do
          academic = build(:academic, intrest_id: nil)
          expect(academic).not_to be_valid
-         expect(academic.errors[:intrest_id]).to include("can't be blank")
+         expect(academic.errors[:intrest_id]).to include(error_message)
         end
  
       it 'validates presence of Qualification Id' do
         academic = build(:academic, qualification_id: nil)
         expect(academic).not_to be_valid
-        expect(academic.errors[:qualification_id]).to include("can't be blank")
+        expect(academic.errors[:qualification_id]).to include(error_message)
         end
   
       it 'validates presence of Career Goals' do
         academic = build(:academic, career_goals: nil)
         expect(academic).not_to be_valid
-        expect(academic.errors[:career_goals]).to include("can't be blank")
+        expect(academic.errors[:career_goals]).to include(error_message)
       end
 
       it 'validates presence of Language' do
          academic = build(:academic, language: nil)
          expect(academic).not_to be_valid
-         expect(academic.errors[:language]).to include("can't be blank")
+         expect(academic.errors[:language]).to include(error_message)
       end
   
       it 'validates presence of Other Language' do
         academic = build(:academic, other_language: nil)
         expect(academic).not_to be_valid
-        expect(academic.errors[:other_language]).to include("can't be blank")
+        expect(academic.errors[:other_language]).to include(error_message)
       end
 
       it 'validates presence of Specialization' do
         academic = build(:academic, specialization: nil)
         expect(academic).not_to be_valid
-        expect(academic.errors[:specialization]).to include("can't be blank")
+        expect(academic.errors[:specialization]).to include(error_message)
       end
 
       it 'validates presence of Experiance' do
         academic = build(:academic, experiance: nil)
         expect(academic).not_to be_valid
-        expect(academic.errors[:experiance]).to include("can't be blank")
+        expect(academic.errors[:experiance]).to include(error_message)
       end
 
       it 'validates presence of User Id' do
          academic = build(:academic, user_id: nil)
          expect(academic).not_to be_valid
-         expect(academic.errors[:user_id]).to include("can't be blank")
+         expect(academic.errors[:user_id]).to include(error_message)
       end
     end
   

@@ -12,7 +12,7 @@ class CoursesController < BaseController
         else
             render json: {
                 message: "Courses Found",
-                courses: courses.as_json(only: [:id,:modul], include: { chapters: { only: [:id,:chap] } })
+                courses: courses
             }, status: :ok
         end
     end
