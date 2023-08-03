@@ -1,63 +1,54 @@
 class ChaptersController < BaseController
     before_action :logged_in_user
     def index
-        if logged_in_user.academic.present?
-            chapters = Chapter.all
-            if chapters.empty?
-                render json: {
-                    message: "Chapters Not Found",
-                    chapters: []
-                }, status: :not_found
-            else
-                response = chapters.map do |chapter|
-                    {
-                      chap: chapter.chap,
-                      course_id: chapter.course_id,
-                      studymaterials: chapter.studymaterials.map do |studymaterial|
-                        {
-                          id: studymaterial.id,
-                          video: studymaterial.video.present? ? url_for(studymaterial.video) : nil,
-                          softcopy: studymaterial.softcopy.present? ? url_for(studymaterial.softcopy) : nil
-                        }
-                      end
-                    }
-                  end
-            
-                  render json: {
-                    message: "Chapters Found",
-                    chapters: response
-                  }, status: :ok
-            end
+        chapters = Chapter.all
+        if chapters.empty?
+            render json: {
+                message: "Chapters Not Found",
+                chapters: []
+            }, status: :not_found
         else
-            render json: { message: "Dude Complete the Academic Form First"
-                }, status: 401
+            response = chapters.map do |chapter|
+                {
+                    chap: chapter.chap,
+                    course_id: chapter.course_id,
+                    studymaterials: chapter.studymaterials.map do |studymaterial|
+                    {
+                        id: studymaterial.id,
+                        video: studymaterial.video.present? ? url_for(studymaterial.video) : nil,
+                        softcopy: studymaterial.softcopy.present? ? url_for(studymaterial.softcopy) : nil
+                    }
+                    end
+                }
+                end
+        
+                render json: {
+                message: "Chapters Found",
+                chapters: response
+                }, status: :ok
         end
     end
+
     def show
-        if logged_in_user.academic.present?
-            chapter = set_chapter
-            if chapter
-                  render json: {
-                    message: "Chapters Found",
-                    chap: chapter.chap,
-                    studymaterials: chapter.studymaterials.map do |studymaterial|
-                        {
-                          id: studymaterial.id,
-                          textbook: studymaterial.textbook,
-                          video: studymaterial.video.present? ? url_for(studymaterial.video) : nil,
-                          softcopy: studymaterial.softcopy.present? ? url_for(studymaterial.softcopy) : nil
-                        }
-                      end
-                  }, status: :ok
-            else
+        chapter = set_chapter
+        if chapter
                 render json: {
-                    message: "Chapter Not Found",
-                    chapter: []
-                }, status: :not_found
-            end
+                message: "Chapters Found",
+                chap: chapter.chap,
+                studymaterials: chapter.studymaterials.map do |studymaterial|
+                    {
+                        id: studymaterial.id,
+                        textbook: studymaterial.textbook,
+                        video: studymaterial.video.present? ? url_for(studymaterial.video) : nil,
+                        softcopy: studymaterial.softcopy.present? ? url_for(studymaterial.softcopy) : nil
+                    }
+                    end
+                }, status: :ok
         else
-            render json: { message: "Dude Complete the Academic Form First"
-                }, status: 401
+            render json: {
+                message: "Chapter Not Found",
+                chapter: []
+            }, status: :not_found
         end
     end
 
@@ -82,27 +73,22 @@ class ChaptersController < BaseController
     end
 
     def destroy
-        if logged_in_user.academic.present?
-            if logged_in_user.role == "admin" || logged_in_user.role == "teacher"
-                chapter = set_chapter
-                if chapter.delete
-                    render json: {
-                        message: "Chapter Deleted Successfully",
-                        chapter: chapter.as_json(only: [:chap, :course_id])
-                    }, status: :ok
-                else
-                    render json: {
-                        message: "Chapter Cannot Be Deleted",
-                        error: chapter.errors.full_messages
-                    }, status: 422
-                end
+        if logged_in_user.role == "admin" || logged_in_user.role == "teacher"
+            chapter = set_chapter
+            if chapter.delete
+                render json: {
+                    message: "Chapter Deleted Successfully",
+                    chapter: chapter.as_json(only: [:chap, :course_id])
+                }, status: :ok
             else
-                render json: { message: "Dude You Don't have permission"
-                }, status: 401
+                render json: {
+                    message: "Chapter Cannot Be Deleted",
+                    error: chapter.errors.full_messages
+                }, status: 422
             end
         else
-            render json: { message: "Dude Complete the Academic Form First"
-                }, status: 401
+            render json: { message: "Dude You Don't have permission"
+            }, status: 401
         end
     end
     private

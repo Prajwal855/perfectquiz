@@ -3,6 +3,11 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
+  resources :rooms do
+    resources :messages
+  end
+  root 'pages#home'
+
   
  # sms Verification Endponit
   post 'users/sms_confirmation', to: 'accounts#sms_confirm'

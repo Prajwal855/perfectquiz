@@ -10,28 +10,23 @@ class CategoriesController < BaseController
         else
             render json: {
                 message:    "Categorys Found",
-                categorys: categorys.as_json(only: [:id, :name])
+                categorys: categorys.as_json(only: [:id, :name], include: { subcategories: { only: [:id,:name] } })
             }, status: :ok
         end
     end
 
     def show
-        if logged_in_user.academic.present?
-           category = set_category
-            if category
-                render json: {
-                    message: "Category Found",
-                   category: category.as_json(only: [:id, :name])
-                }, status: :ok
-            else
-                render json: {
-                    message: "Category Not Found",
-                   category: []
-                }, status: :not_found
-            end
+        category = set_category
+        if category
+            render json: {
+                message: "Category Found",
+                category: category.as_json(only: [:id, :name])
+            }, status: :ok
         else
-            render json: { message: "Dude Complete the Academic Form First"
-                }, status: 401
+            render json: {
+                message: "Category Not Found",
+                category: []
+            }, status: :not_found
         end
     end
 

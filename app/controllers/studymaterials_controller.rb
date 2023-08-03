@@ -1,41 +1,31 @@
 class StudymaterialsController < BaseController
     before_action :logged_in_user
     def index
-        if logged_in_user.academic.present?
-            studymaterials = Studymaterial.all
-            if studymaterials.empty?
-                render json: {
-                    message: "Studymaterials Not Found",
-                    studymaterials: []
-                }, status: :not_found
-            else
-                render json: {
-                    message: "Studymaterials Found",
-                    studymaterials: StudymaterialSerializer.new(studymaterials)
-                }, status: :ok
-            end
+        studymaterials = Studymaterial.all
+        if studymaterials.empty?
+            render json: {
+                message: "Studymaterials Not Found",
+                studymaterials: []
+            }, status: :not_found
         else
-            render json: { message: "Dude Complete the Academic Form First"
-                }, status: 401
+            render json: {
+                message: "Studymaterials Found",
+                studymaterials: StudymaterialSerializer.new(studymaterials)
+            }, status: :ok
         end
     end
 
     def show
-        if logged_in_user.academic.present?
-            studymaterial = set_studymaterial
-            if studymaterial
-                render json: {message: "Studymaterial Found",
-                studymaterial:StudymaterialSerializer.new(studymaterial)
-            }, status: :ok
-            else
-                render json: {
-                    message: "Studymaterial Not Found",
-                    studymaterial: []
-                }, status: :not_found
-            end
+        studymaterial = set_studymaterial
+        if studymaterial
+            render json: {message: "Studymaterial Found",
+            studymaterial:StudymaterialSerializer.new(studymaterial)
+        }, status: :ok
         else
-            render json: { message: "Dude Complete the Academic Form First"
-                }, status: 401
+            render json: {
+                message: "Studymaterial Not Found",
+                studymaterial: []
+            }, status: :not_found
         end
     end
 

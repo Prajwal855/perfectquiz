@@ -16,22 +16,17 @@ class SubcategoriesController < BaseController
     end
 
     def show
-        if logged_in_user.academic.present?
-           subcategory = set_subcategory
-            if subcategory
-                render json: {
-                    message: "Subcategory Found",
-                   subcategory: subcategory.as_json(only: [:id, :name])
-                }, status: :ok
-            else
-                render json: {
-                    message: "Subcategory Not Found",
-                   subcategory: []
-                }, status: :not_found
-            end
+        subcategory = set_subcategory
+        if subcategory
+            render json: {
+                message: "Subcategory Found",
+                subcategory: subcategory.as_json(only: [:id, :name])
+            }, status: :ok
         else
-            render json: { message: "Dude Complete the Academic Form First"
-                }, status: 401
+            render json: {
+                message: "Subcategory Not Found",
+                subcategory: []
+            }, status: :not_found
         end
     end
 

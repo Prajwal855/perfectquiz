@@ -16,22 +16,17 @@ class QualificationsController < BaseController
     end
 
     def show
-        if logged_in_user.academic.present?
-            qualification = set_qualification
-            if qualification
-                render json: {
-                    message: "Qualification Found",
-                    qualification: qualification.as_json(only: [:id, :name])
-                }, status: :ok
-            else
-                render json: {
-                    message: "Qualification Not Found",
-                    qualification: []
-                }, status: :not_found
-            end
+        qualification = set_qualification
+        if qualification
+            render json: {
+                message: "Qualification Found",
+                qualification: qualification.as_json(only: [:id, :name])
+            }, status: :ok
         else
-            render json: { message: "Dude Complete the Academic Form First"
-                }, status: 401
+            render json: {
+                message: "Qualification Not Found",
+                qualification: []
+            }, status: :not_found
         end
     end
 

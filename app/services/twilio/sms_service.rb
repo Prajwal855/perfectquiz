@@ -9,7 +9,6 @@ module Twilio
         def send_otp
                 account_sid = 'ACb1286d25f91ec950d7f7364e7f29b493'
                 auth_token = 'db84bfc0e82193c30fcf20118c292550'
-                from = '+917019824855'
                 @client = Twilio::REST::Client.new(account_sid, auth_token)
                 verification = @client.verify
                                 .v2

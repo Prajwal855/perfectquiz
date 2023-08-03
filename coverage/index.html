@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2023-07-25T13:00:02+05:30">2023-07-25T13:00:02+05:30</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2023-08-02T10:47:13+05:30">2023-08-02T10:47:13+05:30</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -43,9 +43,9 @@
   </div>
 
   <div class="t-line-summary">
-    <b>1263</b> relevant lines,
-    <span class="green"><b>297</b> lines covered</span> and
-    <span class="red"><b>966</b> lines missed. </span>
+    <b>1267</b> relevant lines,
+    <span class="green"><b>298</b> lines covered</span> and
+    <span class="red"><b>969</b> lines missed. </span>
     (<span class="red">
   23.52%
 </span>
@@ -492,8 +492,8 @@
             <td class="strong t-file__name"><a href="#85b441600d279ff2613d389c240fb179d8bcf73a" class="src_link" title="config/application.rb">config/application.rb</a></td>
             <td class="green strong cell--number t-file__coverage">100.00 %</td>
             <td class="cell--number">22</td>
-            <td class="cell--number">6</td>
-            <td class="cell--number">6</td>
+            <td class="cell--number">7</td>
+            <td class="cell--number">7</td>
             <td class="cell--number">0</td>
             <td class="cell--number">1.00</td>
             
@@ -644,12 +644,12 @@
         
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#3a4ac6253124b62b5aaa95de2408aad573f4d133" class="src_link" title="config/routes.rb">config/routes.rb</a></td>
-            <td class="red strong cell--number t-file__coverage">4.69 %</td>
-            <td class="cell--number">104</td>
-            <td class="cell--number">64</td>
+            <td class="red strong cell--number t-file__coverage">4.48 %</td>
+            <td class="cell--number">109</td>
+            <td class="cell--number">67</td>
             <td class="cell--number">3</td>
-            <td class="cell--number">61</td>
-            <td class="cell--number">0.05</td>
+            <td class="cell--number">64</td>
+            <td class="cell--number">0.04</td>
             
           </tr>
         
@@ -9958,8 +9958,8 @@
     
 
     <div class="t-line-summary">
-      <b>6</b> relevant lines.
-      <span class="green"><b>6</b> lines covered</span> and
+      <b>7</b> relevant lines.
+      <span class="green"><b>7</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
 
@@ -10169,13 +10169,13 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="19">
-            
-            
-
+          <li class="covered" data-hits="1" data-linenumber="19">
+            <span class="hits">1</span>
             
 
-            <code class="ruby">    # config.time_zone = &quot;Central Time (US &amp; Canada)&quot;</code>
+            
+
+            <code class="ruby">    config.time_zone = &#39;Kolkata&#39;</code>
           </li>
         </div>
       
@@ -19854,7 +19854,7 @@
     <h3>config/routes.rb</h3>
     <h4>
       <span class="red">
-  4.69%
+  4.48%
 </span>
 
       lines covered
@@ -19863,9 +19863,9 @@
     
 
     <div class="t-line-summary">
-      <b>64</b> relevant lines.
+      <b>67</b> relevant lines.
       <span class="green"><b>3</b> lines covered</span> and
-      <span class="red"><b>61</b> lines missed.</span>
+      <span class="red"><b>64</b> lines missed.</span>
     </div>
 
     
@@ -19931,46 +19931,46 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="6">
+          <li class="missed" data-hits="0" data-linenumber="6">
             
             
 
             
 
-            <code class="ruby">  </code>
+            <code class="ruby">  resources :rooms do</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="7">
+          <li class="missed" data-hits="0" data-linenumber="7">
             
             
 
             
 
-            <code class="ruby"> # sms Verification Endponit</code>
+            <code class="ruby">    resources :messages</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="8">
+          <li class="never" data-hits="" data-linenumber="8">
             
             
 
             
 
-            <code class="ruby">  post &#39;users/sms_confirmation&#39;, to: &#39;accounts#sms_confirm&#39;</code>
+            <code class="ruby">  end</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="9">
+          <li class="missed" data-hits="0" data-linenumber="9">
             
             
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">  root &#39;pages#home&#39;</code>
           </li>
         </div>
       
@@ -19981,18 +19981,18 @@
 
             
 
-            <code class="ruby">  # top_headlines endpoint</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="11">
+          <li class="never" data-hits="" data-linenumber="11">
             
             
 
             
 
-            <code class="ruby">  get &#39;/top_headlines&#39;, to: &#39;news#top_headlines&#39;</code>
+            <code class="ruby">  </code>
           </li>
         </div>
       
@@ -20003,29 +20003,29 @@
 
             
 
+            <code class="ruby"> # sms Verification Endponit</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="13">
+            
+            
+
+            
+
+            <code class="ruby">  post &#39;users/sms_confirmation&#39;, to: &#39;accounts#sms_confirm&#39;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="14">
+            
+            
+
+            
+
             <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="13">
-            
-            
-
-            
-
-            <code class="ruby">  # all_articles API call</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="14">
-            
-            
-
-            
-
-            <code class="ruby">  get &#39;/all_articles&#39;, to: &#39;news#all_articles&#39;</code>
           </li>
         </div>
       
@@ -20036,29 +20036,29 @@
 
             
 
+            <code class="ruby">  # top_headlines endpoint</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="16">
+            
+            
+
+            
+
+            <code class="ruby">  get &#39;/top_headlines&#39;, to: &#39;news#top_headlines&#39;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="17">
+            
+            
+
+            
+
             <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="16">
-            
-            
-
-            
-
-            <code class="ruby">  # sources API call</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="17">
-            
-            
-
-            
-
-            <code class="ruby">  get &#39;/sources&#39;, to: &#39;news#sources&#39;</code>
           </li>
         </div>
       
@@ -20069,40 +20069,40 @@
 
             
 
+            <code class="ruby">  # all_articles API call</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="19">
+            
+            
+
+            
+
+            <code class="ruby">  get &#39;/all_articles&#39;, to: &#39;news#all_articles&#39;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="20">
+            
+            
+
+            
+
             <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="19">
+          <li class="never" data-hits="" data-linenumber="21">
             
             
 
             
 
-            <code class="ruby"> # intrest endpoint</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="20">
-            
-            
-
-            
-
-            <code class="ruby">  get &quot;intrests&quot;, to: &quot;intrests#index&quot;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="21">
-            
-            
-
-            
-
-            <code class="ruby">  get &quot;intrest/:id&quot;, to: &quot;intrests#show&quot;</code>
+            <code class="ruby">  # sources API call</code>
           </li>
         </div>
       
@@ -20113,34 +20113,12 @@
 
             
 
-            <code class="ruby">  post &quot;intrest&quot;, to: &quot;intrests#create&quot;</code>
+            <code class="ruby">  get &#39;/sources&#39;, to: &#39;news#sources&#39;</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="23">
-            
-            
-
-            
-
-            <code class="ruby">  put &quot;intrest/:id&quot;, to: &quot;intrests#update&quot;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="24">
-            
-            
-
-            
-
-            <code class="ruby">  delete &quot;intrest/:id&quot;, to: &quot;intrests#destroy&quot;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="25">
+          <li class="never" data-hits="" data-linenumber="23">
             
             
 
@@ -20151,13 +20129,35 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="26">
+          <li class="never" data-hits="" data-linenumber="24">
             
             
 
             
 
-            <code class="ruby">  # qualifications endpoint</code>
+            <code class="ruby"> # intrest endpoint</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="25">
+            
+            
+
+            
+
+            <code class="ruby">  get &quot;intrests&quot;, to: &quot;intrests#index&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="26">
+            
+            
+
+            
+
+            <code class="ruby">  get &quot;intrest/:id&quot;, to: &quot;intrests#show&quot;</code>
           </li>
         </div>
       
@@ -20168,7 +20168,7 @@
 
             
 
-            <code class="ruby">  get &quot;qualifications&quot;, to: &quot;qualifications#index&quot;</code>
+            <code class="ruby">  post &quot;intrest&quot;, to: &quot;intrests#create&quot;</code>
           </li>
         </div>
       
@@ -20179,7 +20179,7 @@
 
             
 
-            <code class="ruby">  get &quot;qualification/:id&quot;, to: &quot;qualifications#show&quot;</code>
+            <code class="ruby">  put &quot;intrest/:id&quot;, to: &quot;intrests#update&quot;</code>
           </li>
         </div>
       
@@ -20190,34 +20190,12 @@
 
             
 
-            <code class="ruby">  post &quot;qualification&quot;, to: &quot;qualifications#create&quot;</code>
+            <code class="ruby">  delete &quot;intrest/:id&quot;, to: &quot;intrests#destroy&quot;</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="30">
-            
-            
-
-            
-
-            <code class="ruby">  put &quot;qualification/:id&quot;, to: &quot;qualifications#update&quot;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="31">
-            
-            
-
-            
-
-            <code class="ruby">  delete &quot;qualification/:id&quot;, to: &quot;qualifications#destroy&quot;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="32">
+          <li class="never" data-hits="" data-linenumber="30">
             
             
 
@@ -20228,13 +20206,35 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="33">
+          <li class="never" data-hits="" data-linenumber="31">
             
             
 
             
 
-            <code class="ruby">  # categories endpoint</code>
+            <code class="ruby">  # qualifications endpoint</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="32">
+            
+            
+
+            
+
+            <code class="ruby">  get &quot;qualifications&quot;, to: &quot;qualifications#index&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="33">
+            
+            
+
+            
+
+            <code class="ruby">  get &quot;qualification/:id&quot;, to: &quot;qualifications#show&quot;</code>
           </li>
         </div>
       
@@ -20245,7 +20245,7 @@
 
             
 
-            <code class="ruby">  get &quot;categories&quot;, to: &quot;categories#index&quot;</code>
+            <code class="ruby">  post &quot;qualification&quot;, to: &quot;qualifications#create&quot;</code>
           </li>
         </div>
       
@@ -20256,7 +20256,7 @@
 
             
 
-            <code class="ruby">  get &quot;category/:id&quot;, to: &quot;categories#show&quot;</code>
+            <code class="ruby">  put &quot;qualification/:id&quot;, to: &quot;qualifications#update&quot;</code>
           </li>
         </div>
       
@@ -20267,18 +20267,18 @@
 
             
 
-            <code class="ruby">  post &quot;category&quot;, to: &quot;categories#create&quot;</code>
+            <code class="ruby">  delete &quot;qualification/:id&quot;, to: &quot;qualifications#destroy&quot;</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="37">
+          <li class="never" data-hits="" data-linenumber="37">
             
             
 
             
 
-            <code class="ruby">  delete &quot;category/:id&quot;, to: &quot;categories#destroy&quot;</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -20289,18 +20289,18 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">  # categories endpoint</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="39">
+          <li class="missed" data-hits="0" data-linenumber="39">
             
             
 
             
 
-            <code class="ruby">  # subcategories endpoint</code>
+            <code class="ruby">  get &quot;categories&quot;, to: &quot;categories#index&quot;</code>
           </li>
         </div>
       
@@ -20311,7 +20311,7 @@
 
             
 
-            <code class="ruby">  get &quot;subcategories&quot;, to: &quot;subcategories#index&quot;</code>
+            <code class="ruby">  get &quot;category/:id&quot;, to: &quot;categories#show&quot;</code>
           </li>
         </div>
       
@@ -20322,7 +20322,7 @@
 
             
 
-            <code class="ruby">  get &quot;subcategory/:id&quot;, to: &quot;subcategories#show&quot;</code>
+            <code class="ruby">  post &quot;category&quot;, to: &quot;categories#create&quot;</code>
           </li>
         </div>
       
@@ -20333,18 +20333,18 @@
 
             
 
-            <code class="ruby">  post &quot;subcategory&quot;, to: &quot;subcategories#create&quot;</code>
+            <code class="ruby">  delete &quot;category/:id&quot;, to: &quot;categories#destroy&quot;</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="43">
+          <li class="never" data-hits="" data-linenumber="43">
             
             
 
             
 
-            <code class="ruby">  delete &quot;subcategory/:id&quot;, to: &quot;subcategories#destroy&quot;</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -20355,18 +20355,18 @@
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">  # subcategories endpoint</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="45">
+          <li class="missed" data-hits="0" data-linenumber="45">
             
             
 
             
 
-            <code class="ruby"> # academics endpoint</code>
+            <code class="ruby">  get &quot;subcategories&quot;, to: &quot;subcategories#index&quot;</code>
           </li>
         </div>
       
@@ -20377,7 +20377,7 @@
 
             
 
-            <code class="ruby">  get &quot;academics&quot;, to: &quot;academics#index&quot;</code>
+            <code class="ruby">  get &quot;subcategory/:id&quot;, to: &quot;subcategories#show&quot;</code>
           </li>
         </div>
       
@@ -20388,7 +20388,7 @@
 
             
 
-            <code class="ruby">  get &quot;academic/:id&quot;, to: &quot;academics#show&quot;</code>
+            <code class="ruby">  post &quot;subcategory&quot;, to: &quot;subcategories#create&quot;</code>
           </li>
         </div>
       
@@ -20399,34 +20399,12 @@
 
             
 
-            <code class="ruby">  post &quot;academic&quot;, to: &quot;academics#create&quot;</code>
+            <code class="ruby">  delete &quot;subcategory/:id&quot;, to: &quot;subcategories#destroy&quot;</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="49">
-            
-            
-
-            
-
-            <code class="ruby">  put &quot;academic/:id&quot;, to: &quot;academics#update&quot;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="50">
-            
-            
-
-            
-
-            <code class="ruby">  delete &quot;academic/:id&quot;, to: &quot;academics#destroy&quot;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="51">
+          <li class="never" data-hits="" data-linenumber="49">
             
             
 
@@ -20437,13 +20415,35 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="52">
+          <li class="never" data-hits="" data-linenumber="50">
             
             
 
             
 
-            <code class="ruby"> # choices endpoint</code>
+            <code class="ruby"> # academics endpoint</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="51">
+            
+            
+
+            
+
+            <code class="ruby">  get &quot;academics&quot;, to: &quot;academics#index&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="52">
+            
+            
+
+            
+
+            <code class="ruby">  get &quot;academic/:id&quot;, to: &quot;academics#show&quot;</code>
           </li>
         </div>
       
@@ -20454,7 +20454,7 @@
 
             
 
-            <code class="ruby">  get &quot;choices&quot;, to: &quot;choices#index&quot;</code>
+            <code class="ruby">  post &quot;academic&quot;, to: &quot;academics#create&quot;</code>
           </li>
         </div>
       
@@ -20465,7 +20465,7 @@
 
             
 
-            <code class="ruby">  get &quot;choice/:id&quot;, to: &quot;choices#show&quot;</code>
+            <code class="ruby">  put &quot;academic/:id&quot;, to: &quot;academics#update&quot;</code>
           </li>
         </div>
       
@@ -20476,34 +20476,12 @@
 
             
 
-            <code class="ruby">  post &quot;choice&quot;, to: &quot;choices#create&quot;</code>
+            <code class="ruby">  delete &quot;academic/:id&quot;, to: &quot;academics#destroy&quot;</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="56">
-            
-            
-
-            
-
-            <code class="ruby">  put &quot;choice/:id&quot;, to: &quot;choices#update&quot;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="57">
-            
-            
-
-            
-
-            <code class="ruby">  delete &quot;choice/:id&quot;, to: &quot;choices#destroy&quot;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="58">
+          <li class="never" data-hits="" data-linenumber="56">
             
             
 
@@ -20514,13 +20492,35 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="59">
+          <li class="never" data-hits="" data-linenumber="57">
             
             
 
             
 
-            <code class="ruby">  # courses endpoint</code>
+            <code class="ruby"> # choices endpoint</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="58">
+            
+            
+
+            
+
+            <code class="ruby">  get &quot;choices&quot;, to: &quot;choices#index&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="59">
+            
+            
+
+            
+
+            <code class="ruby">  get &quot;choice/:id&quot;, to: &quot;choices#show&quot;</code>
           </li>
         </div>
       
@@ -20531,7 +20531,7 @@
 
             
 
-            <code class="ruby">  get &quot;courses&quot;, to: &quot;courses#index&quot;</code>
+            <code class="ruby">  post &quot;choice&quot;, to: &quot;choices#create&quot;</code>
           </li>
         </div>
       
@@ -20542,7 +20542,7 @@
 
             
 
-            <code class="ruby">  get &quot;course/:id&quot;, to: &quot;courses#show&quot;</code>
+            <code class="ruby">  put &quot;choice/:id&quot;, to: &quot;choices#update&quot;</code>
           </li>
         </div>
       
@@ -20553,29 +20553,29 @@
 
             
 
-            <code class="ruby">  post &quot;course&quot;, to: &quot;courses#create&quot;</code>
+            <code class="ruby">  delete &quot;choice/:id&quot;, to: &quot;choices#destroy&quot;</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="63">
+          <li class="never" data-hits="" data-linenumber="63">
             
             
 
             
 
-            <code class="ruby">  put &quot;course/:id&quot;, to: &quot;courses#update&quot;</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="64">
+          <li class="never" data-hits="" data-linenumber="64">
             
             
 
             
 
-            <code class="ruby">  get &quot;search&quot;, to: &quot;courses#elastic_search&quot;</code>
+            <code class="ruby">  # courses endpoint</code>
           </li>
         </div>
       
@@ -20586,29 +20586,29 @@
 
             
 
-            <code class="ruby">  delete &quot;course/:id&quot;, to: &quot;courses#destroy&quot;</code>
+            <code class="ruby">  get &quot;courses&quot;, to: &quot;courses#index&quot;</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="66">
+          <li class="missed" data-hits="0" data-linenumber="66">
             
             
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">  get &quot;course/:id&quot;, to: &quot;courses#show&quot;</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="67">
+          <li class="missed" data-hits="0" data-linenumber="67">
             
             
 
             
 
-            <code class="ruby">  # chapters endpoint</code>
+            <code class="ruby">  post &quot;course&quot;, to: &quot;courses#create&quot;</code>
           </li>
         </div>
       
@@ -20619,7 +20619,7 @@
 
             
 
-            <code class="ruby">  get &quot;chapters&quot;, to: &quot;chapters#index&quot;</code>
+            <code class="ruby">  put &quot;course/:id&quot;, to: &quot;courses#update&quot;</code>
           </li>
         </div>
       
@@ -20630,7 +20630,7 @@
 
             
 
-            <code class="ruby">  get &quot;chapter/:id&quot;, to: &quot;chapters#show&quot;</code>
+            <code class="ruby">  get &quot;search&quot;, to: &quot;courses#elastic_search&quot;</code>
           </li>
         </div>
       
@@ -20641,34 +20641,12 @@
 
             
 
-            <code class="ruby">  post &quot;chapter&quot;, to: &quot;chapters#create&quot;</code>
+            <code class="ruby">  delete &quot;course/:id&quot;, to: &quot;courses#destroy&quot;</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="71">
-            
-            
-
-            
-
-            <code class="ruby">  put &quot;chapter/:id&quot;, to: &quot;chapters#update&quot;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="72">
-            
-            
-
-            
-
-            <code class="ruby">  delete &quot;chapter/:id&quot;, to: &quot;chapters#destroy&quot;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="73">
+          <li class="never" data-hits="" data-linenumber="71">
             
             
 
@@ -20679,13 +20657,35 @@
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="74">
+          <li class="never" data-hits="" data-linenumber="72">
             
             
 
             
 
-            <code class="ruby">  # studymaterials endpoint</code>
+            <code class="ruby">  # chapters endpoint</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="73">
+            
+            
+
+            
+
+            <code class="ruby">  get &quot;chapters&quot;, to: &quot;chapters#index&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="74">
+            
+            
+
+            
+
+            <code class="ruby">  get &quot;chapter/:id&quot;, to: &quot;chapters#show&quot;</code>
           </li>
         </div>
       
@@ -20696,7 +20696,7 @@
 
             
 
-            <code class="ruby">  get &quot;studymaterials&quot;, to: &quot;studymaterials#index&quot;</code>
+            <code class="ruby">  post &quot;chapter&quot;, to: &quot;chapters#create&quot;</code>
           </li>
         </div>
       
@@ -20707,7 +20707,7 @@
 
             
 
-            <code class="ruby">  get &quot;studymaterial/:id&quot;, to: &quot;studymaterials#show&quot;</code>
+            <code class="ruby">  put &quot;chapter/:id&quot;, to: &quot;chapters#update&quot;</code>
           </li>
         </div>
       
@@ -20718,62 +20718,62 @@
 
             
 
+            <code class="ruby">  delete &quot;chapter/:id&quot;, to: &quot;chapters#destroy&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="78">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="79">
+            
+            
+
+            
+
+            <code class="ruby">  # studymaterials endpoint</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="80">
+            
+            
+
+            
+
+            <code class="ruby">  get &quot;studymaterials&quot;, to: &quot;studymaterials#index&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="81">
+            
+            
+
+            
+
+            <code class="ruby">  get &quot;studymaterial/:id&quot;, to: &quot;studymaterials#show&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="82">
+            
+            
+
+            
+
             <code class="ruby">  post &quot;studymaterial&quot;, to: &quot;studymaterials#create&quot;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="78">
-            
-            
-
-            
-
-            <code class="ruby">  put &quot;studymaterial/:id&quot;, to: &quot;studymaterials#update&quot;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="79">
-            
-            
-
-            
-
-            <code class="ruby">  delete &quot;studymaterial/:id&quot;, to: &quot;studymaterials#destroy&quot;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="80">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="81">
-            
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="82">
-            
-            
-
-            
-
-            <code class="ruby">  # questions endpoint</code>
           </li>
         </div>
       
@@ -20784,7 +20784,7 @@
 
             
 
-            <code class="ruby">  get &quot;questions&quot;, to: &quot;questions#index&quot;</code>
+            <code class="ruby">  put &quot;studymaterial/:id&quot;, to: &quot;studymaterials#update&quot;</code>
           </li>
         </div>
       
@@ -20795,40 +20795,40 @@
 
             
 
-            <code class="ruby">  get &quot;getquestion&quot;, to: &quot;questions#filtered_questions&quot;</code>
+            <code class="ruby">  delete &quot;studymaterial/:id&quot;, to: &quot;studymaterials#destroy&quot;</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="85">
+          <li class="never" data-hits="" data-linenumber="85">
             
             
 
             
 
-            <code class="ruby">  get &quot;question/:id&quot;, to: &quot;questions#show&quot;</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="86">
+          <li class="never" data-hits="" data-linenumber="86">
             
             
 
             
 
-            <code class="ruby">  post &quot;question&quot;, to: &quot;questions#create&quot;</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="87">
+          <li class="never" data-hits="" data-linenumber="87">
             
             
 
             
 
-            <code class="ruby">  put &quot;question/:id&quot;, to: &quot;questions#update&quot;</code>
+            <code class="ruby">  # questions endpoint</code>
           </li>
         </div>
       
@@ -20839,7 +20839,7 @@
 
             
 
-            <code class="ruby">  delete &quot;question/:id&quot;, to: &quot;questions#destroy&quot;</code>
+            <code class="ruby">  get &quot;questions&quot;, to: &quot;questions#index&quot;</code>
           </li>
         </div>
       
@@ -20850,40 +20850,40 @@
 
             
 
-            <code class="ruby">  post &quot;submitanswer&quot;, to: &quot;questions#submit_answers&quot;</code>
+            <code class="ruby">  get &quot;getquestion&quot;, to: &quot;questions#filtered_questions&quot;</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="90">
+          <li class="missed" data-hits="0" data-linenumber="90">
             
             
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">  get &quot;question/:id&quot;, to: &quot;questions#show&quot;</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="91">
+          <li class="missed" data-hits="0" data-linenumber="91">
             
             
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">  post &quot;question&quot;, to: &quot;questions#create&quot;</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="92">
+          <li class="missed" data-hits="0" data-linenumber="92">
             
             
 
             
 
-            <code class="ruby">  # users endpoint</code>
+            <code class="ruby">  put &quot;question/:id&quot;, to: &quot;questions#update&quot;</code>
           </li>
         </div>
       
@@ -20894,7 +20894,7 @@
 
             
 
-            <code class="ruby">  get &quot;users&quot;, to: &quot;users#index&quot;</code>
+            <code class="ruby">  delete &quot;question/:id&quot;, to: &quot;questions#destroy&quot;</code>
           </li>
         </div>
       
@@ -20905,45 +20905,12 @@
 
             
 
-            <code class="ruby">  get &quot;user/:id&quot;, to: &quot;users#show&quot;</code>
+            <code class="ruby">  post &quot;submitanswer&quot;, to: &quot;questions#submit_answers&quot;</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="95">
-            
-            
-
-            
-
-            <code class="ruby">  post &quot;user&quot;, to: &quot;users#create&quot;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="96">
-            
-            
-
-            
-
-            <code class="ruby">  put &quot;user/:id&quot;, to: &quot;users#update&quot;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="97">
-            
-            
-
-            
-
-            <code class="ruby">  delete &quot;user/:id&quot;, to: &quot;users#destroy&quot;</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="98">
+          <li class="never" data-hits="" data-linenumber="95">
             
             
 
@@ -20954,46 +20921,79 @@
         </div>
       
         <div>
+          <li class="never" data-hits="" data-linenumber="96">
+            
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="97">
+            
+            
+
+            
+
+            <code class="ruby">  # users endpoint</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="98">
+            
+            
+
+            
+
+            <code class="ruby">  get &quot;users&quot;, to: &quot;users#index&quot;</code>
+          </li>
+        </div>
+      
+        <div>
           <li class="missed" data-hits="0" data-linenumber="99">
             
             
 
             
 
-            <code class="ruby">  devise_for :users, controllers: {</code>
+            <code class="ruby">  get &quot;user/:id&quot;, to: &quot;users#show&quot;</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="100">
+          <li class="missed" data-hits="0" data-linenumber="100">
             
             
 
             
 
-            <code class="ruby">    sessions: &quot;users/sessions&quot;,</code>
+            <code class="ruby">  post &quot;user&quot;, to: &quot;users#create&quot;</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="101">
+          <li class="missed" data-hits="0" data-linenumber="101">
             
             
 
             
 
-            <code class="ruby">    registrations: &quot;users/registrations&quot;,</code>
+            <code class="ruby">  put &quot;user/:id&quot;, to: &quot;users#update&quot;</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="102">
+          <li class="missed" data-hits="0" data-linenumber="102">
             
             
 
             
 
-            <code class="ruby">    passwords: &quot;users/passwords&quot;</code>
+            <code class="ruby">  delete &quot;user/:id&quot;, to: &quot;users#destroy&quot;</code>
           </li>
         </div>
       
@@ -21004,12 +21004,67 @@
 
             
 
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="104">
+            
+            
+
+            
+
+            <code class="ruby">  devise_for :users, controllers: {</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="105">
+            
+            
+
+            
+
+            <code class="ruby">    sessions: &quot;users/sessions&quot;,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="106">
+            
+            
+
+            
+
+            <code class="ruby">    registrations: &quot;users/registrations&quot;,</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="107">
+            
+            
+
+            
+
+            <code class="ruby">    passwords: &quot;users/passwords&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="108">
+            
+            
+
+            
+
             <code class="ruby">  }</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="104">
+          <li class="never" data-hits="" data-linenumber="109">
             
             
 

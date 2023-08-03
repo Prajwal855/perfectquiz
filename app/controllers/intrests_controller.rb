@@ -16,22 +16,17 @@ class IntrestsController < BaseController
     end
 
     def show
-        if logged_in_user.academic.present?
-            intrest = set_intrest
-            if intrest
-                render json: {
-                    message: "Intrest Found",
-                    intrest: intrest.as_json(only: [:id, :name])
-                }, status: :ok
-            else
-                render json: {
-                    message: "Intrest Not Found",
-                    intrest: []
-                }, status: :not_found
-            end
+        intrest = set_intrest
+        if intrest
+            render json: {
+                message: "Intrest Found",
+                intrest: intrest.as_json(only: [:id, :name])
+            }, status: :ok
         else
-            render json: { message: "Dude Complete the Academic Form First"
-                }, status: 401
+            render json: {
+                message: "Intrest Not Found",
+                intrest: []
+            }, status: :not_found
         end
     end
 
