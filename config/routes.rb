@@ -22,7 +22,9 @@ Rails.application.routes.draw do
   get '/sources', to: 'news#sources'
 
   # Resource routes for various entities
-  resources :intrests, :categories, :qualifications, :academics, :subcategories, :choices, :courses, :chapters, :studymaterials, :questions
+  resources :intrests, :categories, :qualifications, :academics, 
+  :subcategories, :choices, :courses, :chapters, :studymaterials,
+  :questions
 
   # Custom route for course search
   get 'search', to: 'courses#elastic_search'
