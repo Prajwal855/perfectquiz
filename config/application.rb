@@ -18,5 +18,8 @@ module Perfectquiz
     #
     config.time_zone = 'Kolkata'
     # config.eager_load_paths << Rails.root.join("extras")
+    config.generators do |g|
+      g.test_framework :rspec
+    end
   end
 end

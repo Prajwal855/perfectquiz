@@ -57,7 +57,7 @@ RSpec.describe AcademicsController, type: :controller do
 
     payload = { sub: user_id, exp: expiration_time }
 
-    secret_key = Rails.application.credentials.fetch(:secret_key_base)
+    secret_key = ENV['secret_key_base']
     token = JWT.encode(payload, secret_key)
 
     token

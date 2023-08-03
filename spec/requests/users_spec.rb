@@ -38,7 +38,7 @@ RSpec.describe UsersController, type: :controller do
   describe "POST #create" do
     it "creates a new user" do
       expect {
-        post :create, params: { user: { name: "John Doe", email: "john@example.com", password: "password", role: "user" } }
+        post :create, params: { user: { name: "John Doe", email: "john@example.com", password: "password", role: "student" } }
       }.to change(User, :count).by(1)
       expect(response).to have_http_status(:created)
       response_body = JSON.parse(response.body)

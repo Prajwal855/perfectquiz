@@ -33,7 +33,7 @@ class AcademicsController < BaseController
 
     private
     def set_academic
-        academic = Academic.find(id: params[:id])
+        academic = Academic.find_by(id: params[:id])
         if academic
             return academic
         end

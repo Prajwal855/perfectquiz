@@ -1,16 +1,16 @@
 class CategoriesController < BaseController
     before_action :logged_in_user
     def index 
-       categorys =Category.all
-        if categorys.empty?
+       categories =Category.all
+        if categories.empty?
             render json: {
-                message:    "Categorys Not Found",
+                message:    "Categories Not Found",
                Categorys: []
             }, status: :not_found
         else
             render json: {
-                message:    "Categorys Found",
-                categorys: categorys.as_json(only: [:id, :name], include: { subcategories: { only: [:id,:name] } })
+                message:    "Categories Found",
+                categorys: categories.as_json(only: [:id, :name], include: { subcategories: { only: [:id,:name] } })
             }, status: :ok
         end
     end

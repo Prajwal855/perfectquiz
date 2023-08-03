@@ -76,7 +76,7 @@ class UsersController < ActionController::Base
     end
 
     def set_user
-        user = User.find(id: params[:id])
+        user = User.find_by(id: params[:id])
         if user
             return user
         end

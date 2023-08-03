@@ -1,32 +1,37 @@
 class SubcategoriesController < BaseController
     before_action :logged_in_user
     def index 
-       subcategorys = Subcategory.all
-        if subcategorys.empty?
+       subcategories = Subcategory.all
+        if subcategories.empty?
             render json: {
-                message:    "SubCategorys Not Found",
-               subcategorys: []
+                message:    "SubCategories Not Found",
+               subcategories: []
             }, status: :not_found
         else
             render json: {
-                message:    "SubCategorys Found",
-                subcategorys: subcategorys.as_json(only: [:id, :name])
+                message:    "SubCategories Found",
+                subcategories: subcategories.as_json(only: [:id, :name])
             }, status: :ok
         end
     end
 
     def show
-        subcategory = set_subcategory
-        if subcategory
-            render json: {
-                message: "Subcategory Found",
-                subcategory: subcategory.as_json(only: [:id, :name])
-            }, status: :ok
+        if logged_in_user.academic.present?
+           subcategory = set_subcategory
+            if subcategory
+                render json: {
+                    message: "Subcategory Found",
+                   subcategory: subcategory.as_json(only: [:id, :name])
+                }, status: :ok
+            else
+                render json: {
+                    message: "Subcategory Not Found",
+                   subcategory: []
+                }, status: :not_found
+            end
         else
-            render json: {
-                message: "Subcategory Not Found",
-                subcategory: []
-            }, status: :not_found
+            render json: { message: "Dude Complete the Academic Form First"
+                }, status: 401
         end
     end
 
@@ -53,7 +58,7 @@ class SubcategoriesController < BaseController
     def destroy
         if logged_in_user.admin? || logged_in_user.role == "admin"
            subcategory = set_subcategory
-            if category.delete
+            if subcategory.delete
                 render json: {
                     message: "Subcategory Deleted Successfully",
                    subcategory: subcategory.as_json(only: [:id, :name])
@@ -76,7 +81,7 @@ class SubcategoriesController < BaseController
     end
 
     def set_subcategory
-       subcategory = Subcategory.find(id: params[:id])
+       subcategory = Subcategory.find_by(id: params[:id])
         if subcategory
             return subcategory
         end

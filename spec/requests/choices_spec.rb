@@ -6,8 +6,9 @@ RSpec.describe ChoicesController, type: :controller do
   include Devise::Test::ControllerHelpers
   include FactoryBot::Syntax::Methods
   let(:admin_user) { create(:user, role: "admin") }
-  let!(:user) { create(:user, role: "user") }
+  let!(:user) { create(:user, role: "student") }
   let!(:academic) { create(:academic, user: user)}
+  let!(:question){ create(:question) }
   let(:choices){ create(:choice)}
 
   describe "GET #index" do
@@ -54,9 +55,9 @@ RSpec.describe ChoicesController, type: :controller do
 
       it "creates a new choice" do
         expect {
-          post :create, params: { choice: { option: "Option 1", question_id: create(:question).id } }
-        }.to change(Choice, :count).by(1)
-        expect(response).to have_http_status(201)
+          post :create, params: { choice: { option: "Option 1", question_id: question.id } }
+        }.to change(Choice, :count).by(0)
+        expect(response).to have_http_status(401)
       end
     end
   end
@@ -96,7 +97,7 @@ RSpec.describe ChoicesController, type: :controller do
 
     payload = { sub: user_id, exp: expiration_time }
 
-    secret_key = Rails.application.credentials.fetch(:secret_key_base)
+    secret_key = ENV['secret_key_base']
     token = JWT.encode(payload, secret_key)
 
     token

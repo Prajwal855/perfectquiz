@@ -1,6 +1,5 @@
 FactoryBot.define do
   factory :category do
-    name { "MyString" }
-    course { nil }
+    name { "Sample Category" }
   end
 end

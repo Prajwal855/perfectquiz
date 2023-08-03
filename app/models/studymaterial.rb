@@ -3,5 +3,5 @@ class Studymaterial < ApplicationRecord
   has_one_attached :video
   has_one_attached :softcopy
 
-  validates :textbook, :chapter_id, :softcopy, presence: true
+  validates :textbook, :chapter_id, presence: true
 end
