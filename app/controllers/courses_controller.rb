@@ -64,15 +64,6 @@ class CoursesController < BaseController
         elsif user_modul.present? && category_id.present? && from_date.present?
             category_id = category_id.to_i
             matching_courses = matching_courses.where("modul LIKE ? AND category_id = ? AND created_at = ?",user_modul, category_id, from_date)
-        elsif user_modul.present? && subcategory_id.present? && from_date.present?
-            subcategory_id = subcategory_id.to_i
-            matching_courses = matching_courses.where("modul LIKE ? AND subcategory_id = ? AND created_at = ?", user_modul, subcategory_id, from_date)
-        elsif user_modul.present? && category_id.present?
-            category_id = category_id.to_i
-            matching_courses = matching_courses.where("modul LIKE ? AND category_id = ?", "%#{user_modul}%", category_id)
-        elsif user_modul.present? && subcategory_id.present?
-            subcategory_id = subcategory_id.to_i
-            matching_courses = matching_courses.where("modul LIKE ? AND subcategory_id = ?", "%#{user_modul}%", subcategory_id)
         elsif category_id.present? && subcategory_id.present?
             category_id = category_id.to_i
             subcategory_id = subcategory_id.to_i
